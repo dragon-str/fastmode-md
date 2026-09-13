@@ -9,7 +9,7 @@ tags:
   - Python
 authors:
   - name: Daniel Reda
-    orcid: 0000-0000-0000-0000
+    orcid: 0000-0001-6160-6215
     affiliation: 1
 affiliations:
   - name: Independent researcher

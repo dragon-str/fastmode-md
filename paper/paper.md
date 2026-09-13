@@ -2,6 +2,7 @@
 title: "Auditing fast-mode molecular dynamics settings without fooling yourself"
 author:
   - name: Daniel Reda
+    orcid: 0000-0001-6160-6215
 date: 2026-09-12
 ---
 

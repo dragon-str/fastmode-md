@@ -4,6 +4,7 @@ title: "fastmode-md: an audit tool for fast-mode GROMACS integration settings"
 authors:
   - family-names: Reda
     given-names: Daniel
+    orcid: "https://orcid.org/0000-0001-6160-6215"
 version: 0.1.0
 date-released: 2026-09-12
 license: MIT
