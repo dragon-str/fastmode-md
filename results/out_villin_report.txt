@@ -1,0 +1,47 @@
+fastmode audit report
+=====================
+system       : ../phase2b/eq.gro
+topology     : ../phase2b/topol.top
+atoms        : 14528
+reference    : dt 2 fs, hmr off, mts off, nstlist 10, tol 0.005
+production   : 200 ps per run, 2000 warmup steps
+threads      : 4 OpenMP, 1 MPI
+strategy     : staged
+
+Reference, measured:
+  drift 0.0008 kJ/mol/ps/atom   temperature 300.08 K   density 988.1863
+
+Candidates:
+  dt2fs_hmroff_mtsoff_nstlist10_tol0.005               drift    0.0008  T  300.08  rdfdev 0.0000  rho 988.1863      69.6 ns/day  PASS
+  dt3fs_hmroff_mtsoff_nstlist10_tol0.005               drift    0.0010  T  299.82  rdfdev 0.0042  rho 987.9068     103.0 ns/day  PASS
+  dt4fs_hmroff_mtsoff_nstlist10_tol0.005               drift    0.0011  T  300.09  rdfdev 0.0117  rho 988.2229     135.0 ns/day  PASS
+  dt5fs_hmroff_mtsoff_nstlist10_tol0.005               rejected by grompp: Too many warnings (1). If you are sure all warnings are harmless, use the -maxwarn option.
+  dt2fs_hmron_mtsoff_nstlist10_tol0.005                drift    0.0012  T  299.81  rdfdev 0.0041  rho 986.9847      69.8 ns/day  PASS
+  dt3fs_hmron_mtsoff_nstlist10_tol0.005                drift    0.0026  T  300.18  rdfdev 0.0101  rho 988.3462     102.7 ns/day  PASS
+  dt4fs_hmron_mtsoff_nstlist10_tol0.005                rejected by grompp: Too many warnings (1). If you are sure all warnings are harmless, use the -maxwarn option.
+  dt5fs_hmron_mtsoff_nstlist10_tol0.005                rejected by grompp: Too many warnings (1). If you are sure all warnings are harmless, use the -maxwarn option.
+  dt4fs_hmroff_mtspme2_nstlist10_tol0.005              drift    0.0013  T  300.29  rdfdev 0.0134  rho 988.3066     118.2 ns/day  PASS
+  dt4fs_hmroff_mtspme3_nstlist10_tol0.005              run failed: mdrun failed: Wrote pdb files with previous and current coordinates
+  dt4fs_hmroff_mtspme2_nstlist25_tol0.005              drift    0.0013  T  300.07  rdfdev 0.0152  rho 988.4139     118.0 ns/day  PASS
+  dt4fs_hmroff_mtspme2_nstlist50_tol0.005              drift    0.0012  T  300.11  rdfdev 0.0126  rho 988.0840     118.1 ns/day  PASS
+  dt4fs_hmroff_mtspme2_nstlist100_tol0.005             drift    0.0011  T  299.73  rdfdev 0.0114  rho 989.4882     112.2 ns/day  PASS
+  dt4fs_hmroff_mtspme2_nstlist50_tol0.05               drift    0.0011  T  299.79  rdfdev 0.0144  rho 988.3936     114.7 ns/day  PASS
+
+Result
+------
+  fastest passing setting: dt4fs_hmroff_mtsoff_nstlist10_tol0.005
+  speedup over the 2 fs reference : 1.94x
+  conserved drift  0.0011 kJ/mol/ps/atom (limit 0.02)
+  temperature      300.09 K vs 300.08 K
+  rdf max deviation 0.0117 (limit 0.02)
+  density          0.00% from reference (limit 0.5%)
+
+Assumptions
+-----------
+  - Timestep changes scale the production length, so every run
+    covers the same physical time as the reference.
+  - Hydrogen repartition is skipped for pure water: SETTLE already
+    makes the water rigid, so repartition buys nothing there.
+  - The thermostat coupling is tau-t 0.1, matching bench/base.mdp.
+    At 0.5, grompp rejects verlet-buffer-tolerance 0.05 as fatal.
+  - The reference itself carries finite-run statistical error.

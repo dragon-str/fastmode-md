@@ -1,0 +1,7 @@
+mdrun t_step = 0.6841 ms/step at 2652 atoms
+net hidden=16 0.130 ms/call break-even K=0.2
+net hidden=32 0.204 ms/call break-even K=0.3
+net hidden=64 0.345 ms/call break-even K=0.5
+net hidden=128 0.683 ms/call break-even K=1.0
+net hidden=256 1.395 ms/call break-even K=2.0
+step-cost exponent = 0.873

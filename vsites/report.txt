@@ -1,0 +1,40 @@
+fastmode audit report
+=====================
+system       : /Users/danielreda/apps/gromacs-perf/phase0/vsites/build/eq.gro
+topology     : /Users/danielreda/apps/gromacs-perf/phase0/vsites/runs/inputs/topol.top
+atoms        : 14571
+reference    : dt 2 fs, hmr off, mts off, nstlist 10, tol 0.005
+production   : 200 ps per run, 2000 warmup steps
+threads      : 4 OpenMP, 1 MPI
+strategy     : vsites dt sweep
+
+Reference, measured:
+  drift 0.0006 kJ/mol/ps/atom   temperature 299.56 K   density 987.1718
+
+Candidates:
+  dt2fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds      drift    0.0006  T  299.56  rdfdev 0.0000  rho 987.1718      64.7 ns/day  PASS
+  dt4fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds      drift    0.0001  T  300.27  rdfdev 0.0085  rho 987.5630     125.5 ns/day  PASS
+  dt5fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds      drift   -0.0005  T  299.83  rdfdev 0.0164  rho 988.4887     153.4 ns/day  PASS
+  dt6fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds      drift   -0.0011  T  299.76  rdfdev 0.0189  rho 991.1458     181.2 ns/day  PASS
+  dt7fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds      drift    0.0002  T  298.94  rdfdev 0.0295  rho 993.0387     208.2 ns/day  FAIL
+        -> density 0.59% from reference exceeds 0.5%
+        -> rdf max deviation 0.0295 exceeds 0.02
+
+Result
+------
+  fastest passing setting: dt6fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds
+  speedup over the 2 fs reference : 2.80x
+  conserved drift  -0.0011 kJ/mol/ps/atom (limit 0.02)
+  temperature      299.76 K vs 299.56 K
+  rdf max deviation 0.0189 (limit 0.02)
+  density          0.40% from reference (limit 0.5%)
+
+Assumptions
+-----------
+  - Timestep changes scale the production length, so every run
+    covers the same physical time as the reference.
+  - Hydrogen repartition is skipped for pure water: SETTLE already
+    makes the water rigid, so repartition buys nothing there.
+  - The thermostat coupling is tau-t 0.1, matching bench/base.mdp.
+    At 0.5, grompp rejects verlet-buffer-tolerance 0.05 as fatal.
+  - The reference itself carries finite-run statistical error.

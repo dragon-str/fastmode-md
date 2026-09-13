@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+.venv*/
+venv/
+
+# MD engine output (large, regenerable)
+*.xtc
+*.trr
+*.edr
+*.cpt
+*.tpr
+*.log
+#*#
+*.gro
+*.npz
+*.npy
+*.png
+
+# Run output directories; summaries are copied into results/
+out/
+probe/
+search_villin/
+search_vsites/
+vsites/runs/
+spherical/
+spherical_v2/
+spherical_v3/
+spherical_v3_bak/
+spherical_v4/
+softshell/
+softshell_k200/
+validate10x_v2/
+
+# Keep the input system
+!systems/*.gro
+
+# OS
+.DS_Store
+
+# Generated / scratch
+*.pt
+mdout.mdp
+*_out.mdp

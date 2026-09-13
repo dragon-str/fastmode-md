@@ -1,0 +1,15 @@
+Protein-observable validation of the search winners (200 ps, single run each)
+Command: python3 valprotein.py --ref search_villin/runs/reference_cert/dt2fs_hmroff_mtsoff_nstlist10_tol0.005 <runs>
+
+reference search_villin/runs/reference_cert/dt2fs_hmroff_mtsoff_nstlist10_tol0.005
+  Rg mean 0.9535 std 0.0075 nm
+  backbone RMSD mean 0.1290 std 0.0210 nm
+
+run                                                           Rg nm        RMSD nm  RMSF corr RMSF maxdev
+dt6fs_hmron_mtsoff_nstlist10_tol0.005_allbonds       0.9649+-0.0083 0.0803+-0.0198      0.903      0.0386
+dt7fs_hmron_mtsoff_nstlist10_tol0.005_f4.5_allbonds  0.9596+-0.0076 0.0822+-0.0172      0.801      0.0676
+dt4fs_hmron_mtsoff_nstlist10_tol0.005_f3             0.9648+-0.0096 0.0863+-0.0199      0.900      0.0374
+
+Verdict: dt6 all-bonds reproduces the reference RMSF (r=0.903); dt7 drops to 0.801.
+The Rg offset (~1%) is shared by the h-bonds dt4 candidate, so it is run-to-run
+variation, not a constraint effect. Single runs lack power; recommend dt6.

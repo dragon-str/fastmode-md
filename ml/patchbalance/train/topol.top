@@ -1,0 +1,8 @@
+#include "oplsaa.ff/forcefield.itp"
+#include "oplsaa.ff/tip3p.itp"
+
+[ system ]
+water box
+
+[ molecules ]
+SOL 884

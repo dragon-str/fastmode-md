@@ -1,0 +1,5 @@
+frames=20 train=15 test=5 atoms=2652 cutoff=0.5
+pairwise          rms=  252.6  R2=0.812  features=48
+pairwise+angular  rms=  251.5  R2=0.814  features=384
+force magnitude   rms=  582.5 kJ/mol/nm
+R2 gate 0.95: FAILED

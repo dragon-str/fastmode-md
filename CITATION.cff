@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "fastmode-md: an audit tool for fast-mode GROMACS integration settings"
+authors:
+  - family-names: Reda
+    given-names: Daniel
+version: 0.1.0
+date-released: 2026-09-12
+license: MIT
+url: "https://github.com/dragon-str/fastmode-md"

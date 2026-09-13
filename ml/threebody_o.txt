@@ -1,0 +1,3 @@
+all atoms      rms=  252.6 mag=  582.5 R2=0.812
+oxygen only    rms=  308.5 mag=  795.2 R2=0.849
+hydrogen only  rms=  160.4 mag=  439.2 R2=0.867

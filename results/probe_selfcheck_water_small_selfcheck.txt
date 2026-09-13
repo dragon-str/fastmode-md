@@ -1,0 +1,29 @@
+fastmode selfcheck report
+=========================
+system       : ../phase2/npt_3.0.gro
+topology     : ../phase2/topol_3.0.top
+atoms        : 2652
+samples      : 3 independent 2 fs runs, 200 ps each
+seeds        : 1 .. 3
+threads      : 4 OpenMP, 1 MPI
+timing       : load average above 2.0; the selfcheck does not use
+               timings, so this does not affect the result.
+
+Samples:
+  seed 1   drift 0.0026  T  299.80  rho 972.9272
+  seed 2   drift 0.0027  T  299.93  rho 971.2615
+  seed 3   drift 0.0027  T  299.00  rho 972.8735
+
+Noise floor (largest difference between any two samples):
+  temperature      0.931 K   (check limit 1.0)   resolves
+  density          0.172 %   (check limit 0.5)   resolves
+  rdf max dev      0.0059   (check limit 0.02)   resolves
+
+Reading
+-------
+  A candidate difference smaller than the floor is not resolved
+  by this verifier at this run length.  The floors fall as the
+  run gets longer and, for the RDF, as the output interval
+  gets denser (currently 0.05 ps).  The thresholds are
+  fixed; this report only says whether each check can see a
+  difference of one floor.

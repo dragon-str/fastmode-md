@@ -1,0 +1,24 @@
+MTS resonance map, water small, 20 ps production, 4 threads
+drift in kJ/mol/ps/atom; limit 0.02; note 'grompp reject' means grompp refused the setting
+
+ dt(fs)  factor      drift     T(K)    verdict  note
+      2       0    +0.0020   299.67       PASS  
+      2       2    +0.0027   300.51       PASS  
+      2       3    +0.0025   299.82       PASS  
+      2       4    +0.0028   299.72       PASS  
+      2       5    +0.0026   298.93       PASS  
+      3       0    +0.0025   298.79       PASS  
+      3       2    -0.0005   299.51       PASS  
+      3       3    +0.0033   299.99       PASS  
+      3       4    +0.0090   298.74       PASS  
+      3       5    +0.3130   302.73       FAIL  
+      4       0    +0.0036   300.12       PASS  
+      4       2    +0.0030   299.19       PASS  
+      4       3    +0.0108   299.63       PASS  
+      4       4    +2.9900   330.46       FAIL  
+      4       5        n/a      n/a     failed  mdrun failed: website at https://manual.
+      5       0    +0.0026   301.02       PASS  
+      5       2    +0.0046   299.70       PASS  
+      5       3    +0.5030   304.62       FAIL  
+      5       4        n/a      n/a     failed  mdrun failed: website at https://manual.
+      5       5        n/a      n/a     failed  mdrun failed: website at https://manual.

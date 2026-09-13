@@ -1,0 +1,12 @@
+integrator              = steep
+emtol                   = 100
+nsteps                  = 2000
+define                  = -DFLEXIBLE
+cutoff-scheme           = Verlet
+verlet-buffer-tolerance = 0.005
+coulombtype             = PME
+rcoulomb                = 0.7
+rvdw                    = 0.7
+fourierspacing          = 0.12
+constraints             = none
+nstlist                 = 20

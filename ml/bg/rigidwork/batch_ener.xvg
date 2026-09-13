@@ -1,0 +1,25 @@
+# This file was created Sat Sep 12 17:39:46 2026
+# Created by:
+#           :-) GROMACS - gmx energy, 2027.0-dev-20260910-a97258a (-:
+# 
+# Executable:   /Users/danielreda/apps/gromacs-perf/build/bin/gmx
+# Data prefix:  /Users/danielreda/apps/gromacs-perf/gromacs (source tree)
+# Working dir:  /Users/danielreda/apps/gromacs-perf/phase0/ml/bg/rigidwork
+# Command line:
+#   gmx energy -f rerun.edr -o batch_ener.xvg
+# gmx energy is part of G R O M A C S:
+#
+# Gallium Rubidium Oxygen Manganese Argon Carbon Silicon
+#
+@    title "GROMACS Energies"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "(kJ/mol)"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "Potential"
+    0.000000   25.032837

@@ -1,0 +1,8 @@
+#include "amber99sb.ff/forcefield.itp"
+#include "amber99sb.ff/tip3p.itp"
+
+[ system ]
+flexible water box
+
+[ molecules ]
+SOL 128

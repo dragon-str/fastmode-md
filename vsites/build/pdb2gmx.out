@@ -1,0 +1,108 @@
+           :-) GROMACS - gmx pdb2gmx, 2027.0-dev-20260910-a97258a (-:
+
+Executable:   /Users/danielreda/apps/gromacs-perf/phase0/vsites/build/../../../build/bin/gmx
+Data prefix:  /Users/danielreda/apps/gromacs-perf/gromacs (source tree)
+Working dir:  /Users/danielreda/apps/gromacs-perf/phase0/vsites/build
+Command line:
+  gmx pdb2gmx -f ../../../phase2b/prot.pdb -vsite h -heavyh -ff amber99sb -water tip3p -ignh -o prot.gro -p topol.top -i posre.itp
+
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/aminoacids.r2b
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/dna.r2b
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/rna.r2b
+there were 0 atoms with zero occupancy and 30 atoms with          occupancy unequal to one (out of 289 atoms). Check your pdb file.
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/atomtypes.atp
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/aminoacids.rtp
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/dna.rtp
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/rna.rtp
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/aminoacids.hdb
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/dna.hdb
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/rna.hdb
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/aminoacids.n.tdb
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/aminoacids.c.tdb
+Analysing hydrogen-bonding network for automated assignment of histidine
+ protonation. 52 donors and 49 acceptors were found.
+There are 65 hydrogen bonds
+Will use HISE for residue 68
+9 out of 9 lines of specbond.dat converted successfully
+Special Atom Distance matrix:
+                   MET53
+                    SD93
+   HIS68  NE2221   1.328
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/aminoacids.arn
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/dna.arn
+Opening force field file /Users/danielreda/apps/gromacs-perf/gromacs/share/top/amber99sb.ff/rna.arn
+Marked 293 virtual sites
+Added 46 dummy masses
+Added 72 new constraints
+Before cleaning: 1545 pairs
+Before cleaning: 1560 dihedrals
+
+GROMACS reminds you: "Push It Real Good" (Salt 'n' Pepa)
+
+Using the Amber99sb force field in directory amber99sb.ff
+
+going to rename amber99sb.ff/aminoacids.r2b
+
+going to rename amber99sb.ff/dna.r2b
+
+going to rename amber99sb.ff/rna.r2b
+Reading ../../../phase2b/prot.pdb...
+Read '', 289 atoms
+
+Analyzing pdb file
+Splitting chemical chains based on TER records or chain id changing.
+
+There are 1 chains and 0 blocks of water and 35 residues with 289 atoms
+
+  chain  #res #atoms
+
+  1 'A'    35    289  
+
+there were 0 atoms with zero occupancy and 30 atoms with          occupancy unequal to one (out of 289 atoms). Check your pdb file.
+
+Reading residue database... (Amber99sb)
+
+Preserving residues names by default
+
+Preserving residues names by default
+
+Preserving residues names by default
+
+Processing chain 1 'A' (289 atoms, 35 residues)
+
+Identified residue LEU42 as a starting terminus.
+
+Identified residue PHE76 as a ending terminus.
+
+Checking for duplicate atoms....
+
+Generating any missing hydrogen atoms and/or adding termini.
+
+Now there are 35 residues with 582 atoms
+
+Making bonds...
+
+Number of bonds was 590, now 589
+
+Generating angles, dihedrals and pairs...
+
+Making cmap torsions...
+
+There are 1560 dihedrals,  118 impropers, 1067 angles
+          1530 pairs,      589 bonds and   313 virtual sites
+
+Total mass 4083.784 a.m.u.
+
+Total charge 2.000 e
+
+Writing topology
+
+Writing coordinate file...
+
+		--------- PLEASE NOTE ------------
+
+You have successfully generated a topology from: ../../../phase2b/prot.pdb.
+
+The Amber99sb force field and the tip3p water model are used.
+
+		--------- ETON ESAELP ------------

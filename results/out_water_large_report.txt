@@ -1,0 +1,48 @@
+fastmode audit report
+=====================
+system       : ../phase2/npt_6.0.gro
+topology     : ../phase2/topol_6.0.top
+atoms        : 21087
+reference    : dt 2 fs, hmr off, mts off, nstlist 10, tol 0.005
+production   : 200 ps per run, 2000 warmup steps
+threads      : 4 OpenMP, 1 MPI
+strategy     : staged
+
+Reference, measured:
+  drift 0.0006 kJ/mol/ps/atom   temperature 300.00 K   density 974.4610
+
+Candidates:
+  dt2fs_hmroff_mtsoff_nstlist10_tol0.005               drift    0.0006  T  300.00  rdfdev 0.0000  rho 974.4610      49.1 ns/day  PASS
+  dt3fs_hmroff_mtsoff_nstlist10_tol0.005               drift    0.0006  T  299.85  rdfdev 0.0064  rho 974.7204      72.0 ns/day  PASS
+  dt4fs_hmroff_mtsoff_nstlist10_tol0.005               drift    0.0007  T  299.90  rdfdev 0.0103  rho 974.4070      94.5 ns/day  PASS
+  dt5fs_hmroff_mtsoff_nstlist10_tol0.005               drift    0.0007  T  299.96  rdfdev 0.0156  rho 976.3830     116.0 ns/day  PASS
+  dt5fs_hmroff_mtspme2_nstlist10_tol0.005              drift    0.0020  T  299.91  rdfdev 0.0189  rho 974.2435     105.2 ns/day  PASS
+  dt5fs_hmroff_mtspme3_nstlist10_tol0.005              drift    0.5340  T  305.02  rdfdev 0.0284  rho 968.7821     114.3 ns/day  FAIL
+        -> drift 0.534 exceeds limit 0.02
+        -> temperature 305.02 K vs 300.00 K exceeds 1.0 K
+        -> density 0.58% from reference exceeds 0.5%
+        -> rdf max deviation 0.0284 exceeds 0.02
+  dt5fs_hmroff_mtspme2_nstlist25_tol0.005              drift    0.0021  T  300.01  rdfdev 0.0201  rho 974.5514     104.2 ns/day  FAIL
+        -> rdf max deviation 0.0201 exceeds 0.02
+  dt5fs_hmroff_mtspme2_nstlist50_tol0.005              drift    0.0022  T  299.76  rdfdev 0.0189  rho 974.4287     104.7 ns/day  PASS
+  dt5fs_hmroff_mtspme2_nstlist100_tol0.005             drift    0.0019  T  300.45  rdfdev 0.0185  rho 974.6386      98.4 ns/day  PASS
+  dt5fs_hmroff_mtspme2_nstlist50_tol0.05               drift    0.0021  T  300.21  rdfdev 0.0196  rho 974.8883     100.7 ns/day  PASS
+
+Result
+------
+  fastest passing setting: dt5fs_hmroff_mtsoff_nstlist10_tol0.005
+  speedup over the 2 fs reference : 2.36x
+  conserved drift  0.0007 kJ/mol/ps/atom (limit 0.02)
+  temperature      299.96 K vs 300.00 K
+  rdf max deviation 0.0156 (limit 0.02)
+  density          0.20% from reference (limit 0.5%)
+
+Assumptions
+-----------
+  - Timestep changes scale the production length, so every run
+    covers the same physical time as the reference.
+  - Hydrogen repartition is skipped for pure water: SETTLE already
+    makes the water rigid, so repartition buys nothing there.
+  - The thermostat coupling is tau-t 0.1, matching bench/base.mdp.
+    At 0.5, grompp rejects verlet-buffer-tolerance 0.05 as fatal.
+  - The reference itself carries finite-run statistical error.

@@ -1,0 +1,32 @@
+extracting every 40th frame ...
+frames=103 atoms=14528
+protein atoms=584 water oxygens=4648
+
+q against distance to nearest protein atom
+  d (nm)    count     q mean   q std
+  0.0-0.2      808   +0.371   0.202
+  0.2-0.4    20426   +0.514   0.203
+  0.4-0.6    25066   +0.574   0.190
+  0.6-0.8    31714   +0.572   0.192
+  0.8-1.0    38080   +0.574   0.191
+  1.0-1.2    45453   +0.572   0.192
+  1.2-1.4    52688   +0.572   0.192
+  1.4-1.6    54661   +0.571   0.190
+  1.6-1.8    51215   +0.571   0.190
+  1.8-2.0    44279   +0.573   0.191
+  2.0-2.2    35751   +0.570   0.191
+  2.2-2.4    25316   +0.572   0.191
+  2.4-2.6    14044   +0.572   0.191
+
+water fraction beyond a distance
+  d (nm)   fraction beyond
+   0.4     0.942
+   0.6     0.887
+   0.8     0.817
+   1.0     0.733
+   1.2     0.632
+   1.5     0.455
+   2.0     0.185
+
+mean nearest-protein distance = 1.413 nm
+-> the coarsenable fraction is the fraction beyond the shell radius

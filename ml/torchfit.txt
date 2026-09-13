@@ -1,0 +1,11 @@
+Capacity test on the pairwise-plus-angular descriptor
+water small, 20 frames (15 train, 5 test), 384 features
+force magnitude 582.5 kJ/mol/nm; features 2652
+
+hidden       rms      R2
+linear     251.5   0.814
+    32     341.1   0.657
+   128     270.1   0.785
+   512     255.9   0.807
+
+R2 gate 0.95. A flat row means capacity is not the limit.
