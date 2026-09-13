@@ -1,5 +1,7 @@
 # fastmode
 
+[![DOI](https://img.shields.io/badge/DOI-10.17605%2FOSF.IO%2FX4T8M-blue)](https://doi.org/10.17605/OSF.IO/X4T8M)
+
 Find the fastest safe GROMACS setting for a system, and prove it on that system.
 
 A production run usually uses `dt = 2 fs` and no virtual sites. A correct setup
