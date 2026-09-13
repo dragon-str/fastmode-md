@@ -231,7 +231,9 @@ and a GPU-free learned surrogate is not a path to speed here.
 The tool, the search harness, the validation scripts, and the reduced results
 are at `https://github.com/dragon-str/fastmode-md` under the MIT license. The
 trajectories are not stored because every reported number is reduced to a report
-file in `results/` and every run is reproducible from the tool.
+file in `results/` and every run is reproducible from the tool. The archived
+version is registered on OSF at `https://osf.io/x4t8m/` (DOI
+`10.17605/OSF.IO/X4T8M`).
 
 # Acknowledgements
 
