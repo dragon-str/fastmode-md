@@ -55,7 +55,7 @@ single unverified number.
 ## Systems
 
 We use four water boxes and one protein. The water boxes contain 2652, 8916 and
-21087 atoms (SPC/E-like TIP3P at three densities) and the villin HP-35 domain
+21087 atoms (TIP3P at three densities) and the villin HP-35 domain
 contains 14528 atoms (582 protein atoms, 4648 waters, 2 chloride ions). We also
 build a virtual-site variant of the protein with `pdb2gmx -vsite h -heavyh`.
 Runs use GROMACS 2027.0-dev on an ARM CPU with four OpenMP threads and no GPU.
@@ -148,7 +148,7 @@ Removing bulk water and keeping only a thin solvent shell gives the largest
 number. A spherical droplet of 974 mobile waters inside a box, with an outer
 water layer restrained or frozen and a reaction field for the electrostatics,
 runs at dt 4 fs and 7-13x the periodic reference depending on the boundary
-variant. We validated it with five replicas of 0.3 ns against a periodic 2 fs
+variant. We validated it with up to five replicas of 0.3 ns against a periodic 2 fs
 reference:
 
 | configuration | Rg (nm) | RMSF corr. | O-O order q | drift |
@@ -188,7 +188,7 @@ a general speedup, and we closed each one with a measurement:
 | local water-patch proposal | closed: the Hastings penalty exceeds the gain |
 | Boltzmann generator, Cartesian | closed: unphysical bond geometry; proposal energy about 1e18 |
 | Boltzmann generator, rigid body | closed: the flow never learns excluded volume; acceptance 0/2000 |
-| one-site coarse-grain water | closed: iterative Boltzmann inversion diverges; the first RDF peak is 25 percent too low |
+| one-site coarse-grained water | closed: iterative Boltzmann inversion diverges; the first RDF peak is 25 percent too low |
 
 The unifying reason is that an ML surrogate does not help on this hardware: a
 neural network is slower than optimized C per force evaluation. ML can only win

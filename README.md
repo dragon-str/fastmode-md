@@ -9,20 +9,22 @@ it. It runs a 2 fs reference, sweeps the settings, validates every candidate
 against the reference on four checks, and reports the fastest setting that
 passes every check. It reports every failure with its number.
 
-For a protein, hydrogen virtual sites are the main line, not an extra. On this
-build, `grompp` refuses `dt >= 4 fs` with plain hydrogen mass repartition (HMR)
-alone, because the carboxylate bond CG-OD1 has an oscillational period of
-2.2e-02 ps and no hydrogen transform can lengthen it. That caps HMR at 3 fs, or
-about 1.5x. A `pdb2gmx -vsite h -heavyh` rebuild removes every hydrogen from the
-dynamics, and `constraints = all-bonds` additionally constrains the few remaining
-heavy-atom bonds. Together they pass `dt` 4, 5 and 6 fs through grompp with no
-warning. Stage 2 builds that system and sweeps it; see below.
+For a protein, the lever is `constraints = all-bonds`, not hydrogen virtual
+sites. On this build, `grompp` refuses `dt >= 4 fs` with plain hydrogen mass
+repartition (HMR) alone, because the carboxylate bond CG-OD1 has an oscillational
+period of 2.2e-02 ps and no hydrogen transform can lengthen it. That caps HMR at
+3 fs, or about 1.5x. Adding `constraints = all-bonds` constrains the remaining
+heavy-atom bonds and lets the plain protein reach `dt` 6 to 7 fs with no warning.
+Hydrogen virtual sites are an alternative that removes every hydrogen from the
+dynamics, but a rebuilt virtual-site system and a plain all-bonds system reach the
+same speed, so virtual sites are not required. Stage 2 builds the virtual-site
+system and sweeps it; see below.
 
 ## Run it
 
 ```sh
-cd ~/apps/gromacs-perf/phase0
-export GMXLIB=~/apps/gromacs-perf/gromacs/share/top
+# from the repository root
+export GMXLIB=/path/to/gromacs/share/top
 
 python3 fastmode.py audit \
     --gro systems/npt_3.0.gro \
@@ -39,7 +41,7 @@ Outputs, in `--out`:
 
 Options:
 
-- `--gmx`          path to the binary (default `build/bin/gmx`)
+- `--gmx`          path to the `gmx` binary (default `build/bin/gmx`)
 - `--ntomp`        OpenMP threads (default 4; the fastmode track uses 4)
 - `--ref-ps`       production length in ps for each run (default 200)
 - `--strategy`     `staged` (default) or `grid`
@@ -94,7 +96,7 @@ fixed and are never lowered.
 2. Mean temperature within 1 K of the reference mean.
 3. O-O radial distribution function: maximum absolute deviation from the
    reference below 0.02, from `gmx rdf -ref "name OW" -sel "name OW"`.
-4. Mean density within 0.5 percent of the reference mean.
+4. Mean density within 0.5 % of the reference mean.
 
 The first 2000 steps are discarded for every measurement, and `mdrun` gets
 `-resetstep 2000`.
@@ -123,9 +125,9 @@ python3 stage2.py build                 # pdb2gmx, solvate, ionise, em, 300 ps e
 python3 stage2.py sweep --ref-ps 200    # dt {4, 5, 6, 7} fs vs its own 2 fs ref
 ```
 
-The rebuild uses `phase2b/prot.pdb`, the cleaned HP-35 domain. The handoff named
-`phase2b/1yrf.pdb`, but that file carries an extra N-terminal segment (residues
-35 to 41), which makes `pdb2gmx` split the chain and stop. Build it with
+The rebuild uses `prot.pdb`, the cleaned HP-35 domain. The related `1yrf.pdb`
+carries an extra N-terminal segment (residues 35 to 41), which makes `pdb2gmx`
+split the chain and stop. Build it with
 `pdb2gmx -vsite h -heavyh -ff amber99sb -water tip3p -ignh`: 293 hydrogens
 become virtual sites, 313 sites in total, mass 4083.784, charge +2. Then
 `editconf -d 1.2 -bt cubic`, `solvate`, `genion -neutral`, minimisation, and a
@@ -203,6 +205,11 @@ The three plain-water systems all land on `dt 5 fs`, no HMR, no MTS,
 at `dt 4 fs`, 1.94x, because `grompp` refuses `dt 5 fs` on the CG-OD1 carboxylate
 bond and HMR cannot move it. The virtual-site rebuild clears that block and
 reaches `dt 6 fs`, 2.80x.
+
+This audit sweeps `constraints` only as `h-bonds`. The brute-force search below
+adds `constraints = all-bonds` and reaches `dt 6 fs` at 2.71x with no virtual
+sites. The two virtual-site figures differ because the stage-2 sweep and the
+later search used different references (2.80x and 2.74x respectively).
 
 The virtual-site result is the headline for proteins, but it is marginal: the
 `dt 6` RDF deviation is 0.0189 against the 0.02 limit, and its density is 0.40 %
@@ -351,6 +358,3 @@ Key points:
   the wall. dt 4 remains the shell ceiling.
 - It is slower (7.0x vs 12.9x) because it keeps 974 mobile waters instead of 809
   and uses rcoulomb 1.2 nm.
-
-
-

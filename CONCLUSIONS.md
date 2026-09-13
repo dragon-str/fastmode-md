@@ -88,8 +88,8 @@ result.
 ## Scope and novelty
 
 Every speed ingredient here is standard: HMR, virtual sites, all-bonds
-constraints, reaction field, and spherical boundaries. The 10x is therefore a
-stack of known approximations, not a new method. The contribution is the
+constraints, reaction field, and spherical boundaries. The headline speedup is
+therefore a stack of known approximations, not a new method. The contribution is the
 methodology: a systematic integration-space search with four observable checks
 against a measured noise floor, the quantitative result that the carboxylate bond
 rather than hydrogen sets the protein timestep, the negative result that virtual
