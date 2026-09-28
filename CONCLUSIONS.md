@@ -34,8 +34,8 @@ threshold is lowered.
 ## Speed results (ARM Mac, 4 OpenMP threads)
 
 Each speedup is against a 2 fs reference timed in the same batch. The same 2 fs
-villin reference ran at 46.8, 64.8 and 69.6 ns/day in three batches, so a speedup
-is only meaningful against its own batch's reference.
+villin reference has measured between 45.1 and 69.6 ns/day across batches, so a
+speedup is only meaningful against its own batch's reference.
 
 | system | setting | speedup | what changes |
 |---|---|---|---|
@@ -70,15 +70,17 @@ warmup excluded (`results/revalidate_2026-09.txt`):
 - **dt 7 fs, HMR 3, all-bonds (one seed each):** 2 of 3 with default LINCS, 0 of
   3 with tight LINCS.
 
-Protein RMSF correlations for all candidates overlap the reference-to-reference
-range (0.83-0.90), but plain dt 4 fs reaches 0.67. Three runs per setting cannot
-resolve RMSF differences of this size, and the nine comparisons per setting are
-not independent.
+Every candidate group has RMSF correlations below the lowest reference pair
+(0.83): plain dt 4 fs reaches 0.67, dt 6 fs with default LINCS 0.81, and with
+tight LINCS 0.72. Three runs per setting cannot resolve RMSF differences of this
+size, and the nine comparisons per setting are not independent.
 
-`constraints = all-bonds` freezes every bond, which changes the configurational
-distribution, not only the dynamics; HMR changes masses and leaves the
-configurational distribution unchanged. Both need validation, which is what the
-checks provide, and the systematic shifts above are what they detected.
+`constraints = all-bonds` freezes every bond, which changes the protein's
+configurational distribution, not only its dynamics; HMR changes only masses.
+That does not explain the measured shifts: they are in water density and
+structure, water is rigid in every run, and the search shows no extra density
+shift from all-bonds at dt 4 fs. The cause of the dt 6 fs shifts is not
+established.
 
 Version 0.1.0 reported an RMSF correlation of 0.90 for the dt 6 fs setting. That
 run used HMR factor 4.0, not factor 3, and there was no noise floor to judge it.
@@ -107,8 +109,9 @@ reported up to 12.9x by dividing by a slower reference from a different batch.
    (`results/grompp_limits_2026-09.txt`).
 2. **All-bond constraints need HMR to go past dt 4.** Without HMR every
    all-bonds run at dt 5 fs or more crashed. With HMR factors 2.5 to 4.5 they
-   certified at dt 5, 6 and 7 fs, and every setting at dt 8 fs crashed. What sets
-   the dt 8 limit is not identified.
+   certified at dt 5, 6 and 7 fs, except factor 3 at dt 7 fs, which failed the
+   RDF check (0.0206); every setting at dt 8 fs crashed. What sets the dt 8
+   limit is not identified.
 3. **LINCS accuracy trades drift against structure** at dt 6 fs, as above.
 4. **Virtual sites do not stack with all-bonds.** A virtual-site rebuild with
    all-bonds reaches 2.74x at dt 6 fs, about the same as HMR plus all-bonds, for
@@ -151,9 +154,12 @@ a dense liquid: stiff bonds, excluded volume, and the first RDF peak.
   separate protein-observable comparison.
 - The drift check reads GROMACS's whole-run drift. With the warmup excluded, the
   re-validation production drift agrees with it to within 0.0005.
-- Up to v0.2.0 a units error excluded only the first frame, not the 4 ps warmup,
-  from temperature, density and the RDF. The committed audit, search and
-  selfcheck results carry that error; the re-validation does not.
+- Up to v0.2.0 a units error skipped only the first frame of the warmup. The
+  warmup is 2000 steps, so its length grows with the timestep (4 ps at 2 fs, 8
+  ps at 4 fs, 14 ps at 7 fs), and each run is that warmup plus the production
+  time. The committed audit, search and selfcheck results therefore average over
+  the warmup as well; for a 20 ps search screen at dt 7 fs it was 14 of 34 ps.
+  `fastmode.warmup_time_ps` holds the fix, and the re-validation uses it.
 - On small water the temperature noise floor (0.93 K) nearly equals the 1 K
   limit, so a correct setting can fail by chance.
 - No long-range dispersion correction is used, so TIP3P densities sit at
@@ -173,11 +179,12 @@ and a record of what that found, including this version's own corrections.
 
 ## Recommendations
 
-For a small solvated protein on a CPU, dt 4 fs with h-bonds (about 1.9x) is the
-setting with the smallest systematic shifts. dt 6 fs with HMR factor 3 and
+For a small solvated protein on a CPU, dt 4 fs with h-bonds (about 1.9x) has the
+smallest density and drift shifts. dt 6 fs with HMR factor 3 and
 `constraints = all-bonds` at default LINCS settings (about 2.7x) passes every
-check but shifts density, water structure and drift by small, measurable
-amounts; use it where those shifts do not matter. Do not tighten LINCS on that
+check but shifts density (+0.3 %) and drift (-0.006) by small, measurable
+amounts; both settings shift the water structure by similar amounts. Use dt 6 fs
+where those shifts do not matter. Do not tighten LINCS on that
 setting without re-validating. Use the shell only as an explicitly labelled
 model change for protein-only questions. Validate any of these on your own
 system.

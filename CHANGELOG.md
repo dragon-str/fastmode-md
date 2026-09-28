@@ -7,9 +7,9 @@ All notable changes to this project are recorded here. The format follows
 ## [0.2.0] - 2026-09-27
 
 This release corrects errors in 0.1.0, the version registered at DOI
-10.17605/OSF.IO/X4T8M. Two rounds of independent AI review found them: one of
-0.1.0, and one of the first draft of this correction, which itself contained a
-wrong recommendation. Each finding was checked against the committed data or new
+10.17605/OSF.IO/X4T8M. Three rounds of independent AI review found them: one of
+0.1.0 and two of drafts of this correction, the first of which itself contained
+a wrong recommendation. Each finding was checked against the committed data or new
 runs before correction.
 
 ### Corrected
@@ -32,8 +32,10 @@ runs before correction.
   (`experiments/grompp_limits.py`). The first draft of 0.2.0 named Leu at
   factor 3, which was wrong.
 - **Warmup exclusion.** `evaluate()` computed the warmup as
-  `WARMUP_STEPS * dt / 1000` with `dt` already in ps, so 0.004 ps instead of
-  4 ps, and temperature, density and the RDF included the warmup. Fixed
+  `WARMUP_STEPS * dt / 1000` with `dt` already in ps, so it skipped 0.004 ps of
+  a 2000-step warmup that lasts 4 ps at 2 fs and 14 ps at 7 fs. Temperature,
+  density and the RDF included the warmup; for a 20 ps search screen at dt 7 fs
+  it was 14 of 34 ps. Fixed
   (`fastmode.warmup_time_ps`, with a test). The committed audit, search and
   selfcheck results carry the error; the re-validation was recomputed with the
   fix.
@@ -76,6 +78,8 @@ runs before correction.
 - `hmr-check` writes to the current directory, not the script's directory.
 - `valprotein.py` takes `--begin-ps` to skip the warmup.
 - `search_dashboard.py` no longer truncates HMR factors to integers.
+- `experiments/revalidate.py` no longer prints a speedup: its runs came from
+  more than one batch. `--summary-only` rewrites the report from the JSON.
 
 ### Added
 

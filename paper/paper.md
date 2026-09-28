@@ -16,9 +16,9 @@ wrong, its shell speedups were divided by a reference from a different batch, a
 units error meant the warmup was never excluded from the checks, and its
 Lyapunov figure was both miscalculated and confounded by a stochastic
 thermostat. This version corrects each error and re-validates the villin
-settings with three seeds each. Two rounds of independent AI review of the
-released and the corrected versions found these errors; the first draft of this
-correction itself contained a wrong recommendation, which the second round
+settings with three seeds each. Three rounds of independent AI review, of the
+released version and of two drafts of this correction, found these errors; the
+first draft itself contained a wrong recommendation, which the second round
 caught.
 
 # Abstract
@@ -36,8 +36,9 @@ lift this limit, and at a mass factor of 4 it lowers it. All-bond constraints
 remove the limit but crash without HMR. With HMR factor 3 they reach dt 6 fs
 (about 2.7x), which passes all four checks in three seeds but shifts density,
 water structure and energy drift by small amounts that exceed the run-to-run
-noise. Tightening the LINCS constraint solver removes the drift bias but makes
-the structural shift large enough to fail the checks. A spherical solvent shell
+noise. Tightening the LINCS constraint solver removes the drift bias but moves
+the water structure further, and that setting fails the checks in 6 of 9
+comparisons. A spherical solvent shell
 reaches 4.6-8.8x but changes the model.
 
 # Statement of need
@@ -81,9 +82,11 @@ same system:
 3. Maximum absolute deviation of the O-O radial distribution function below 0.02.
 4. Mean density within 0.5 percent of the reference.
 
-The first 2000 steps are meant to be excluded from checks 2-4. Up to version
-0.2.0 a units error excluded only the first frame; the audit and search results
-reported below carry that error, and the re-validation does not. A missing check
+The first 2000 steps (4 ps at 2 fs, up to 14 ps at 7 fs) are meant to be
+excluded from checks 2-4; each run is that warmup plus the production time. Up
+to version 0.2.0 a units error excluded only the first frame. The audit, search
+and selfcheck results reported below carry that error, and the re-validation
+does not. A missing check
 is a failure. The RDF and density describe the water; for the protein we add a
 separate comparison of the radius of gyration, backbone RMSD and per-residue
 RMSF.
@@ -101,13 +104,15 @@ velocities and reports the largest pairwise difference for each check. At 200 ps
 The tool reports these floors but does not use them in the verdict; a verdict is
 a fixed-threshold comparison. On small water the temperature floor nearly
 equals the 1 K limit, so a correct setting can fail by chance. A maximum over
-three samples is a rough estimate of the floor.
+three samples is a rough estimate of the floor: the re-validation below, with
+the warmup correctly excluded, measures a villin density floor of up to 0.26 %,
+about 2.5 times the value in this table.
 
 ## Timing
 
 A run is timed only when the external machine load is below 2. This does not
-make timings comparable between batches: the same 2 fs villin reference ran at
-46.8, 64.8 and 69.6 ns/day in three batches. We report each speedup against a
+make timings comparable between batches: the same 2 fs villin reference has run
+at between 45.1 and 69.6 ns/day across batches. We report each speedup against a
 reference timed in the same batch. For the villin settings we timed every
 setting in five interleaved rounds and report the median ratio; those rounds
 ran under an external load of up to about 3.4, so the speedups are approximate.
@@ -170,13 +175,16 @@ Plain dt 4 fs and dt 6 fs with default LINCS pass every comparison. Both shift
 the water structure above the noise floor and below the limit. dt 6 fs also
 raises the density by about 0.3 % in all three seeds and carries a systematic
 drift of -0.0061 from LINCS error, and one of its seeds has an Rg 1.7 % above
-the reference mean. Tight LINCS removes the drift bias but increases the
-density and RDF shifts until the checks fail in 6 of 9 comparisons; we have not
+the reference mean. Tight LINCS removes the drift bias but moves the water
+structure further (RDF deviation 0.017-0.025 against 0.010-0.014), and the
+setting fails the checks in 6 of 9 comparisons, with its mean RDF deviation
+(0.021) at the limit; its larger density shift is within the noise. We have not
 established why. Single runs at dt 7 fs pass 2 of 3 comparisons with default
-LINCS and none with tight LINCS. The RMSF correlations overlap the
-reference-to-reference range except for plain dt 4 fs, which reaches 0.67.
-Three runs per setting cannot resolve RMSF differences of this size, and the
-nine comparisons per setting share runs, so they are not independent.
+LINCS and none with tight LINCS. Every candidate group has RMSF correlations
+below the lowest reference pair (0.83): 0.67 for plain dt 4 fs, 0.81 for dt 6 fs
+with default LINCS and 0.72 with tight LINCS. Three runs per setting cannot
+resolve RMSF differences of this size, and the nine comparisons per setting
+share runs, so they are not independent.
 
 In five interleaved timing rounds, plain dt 4 fs runs 1.93x (range 1.54-1.94x)
 and dt 6 fs with default LINCS 2.67x (range 2.13-2.70x), each relative to the
@@ -248,8 +256,8 @@ Those failures are the useful part. Version 0.1.0 passed its own checks and
 still drew a wrong conclusion: the write-up credited all-bond constraints
 without checking the all-bonds runs without HMR, which had crashed; the protein
 check ran on a different setting from the one recommended; single runs were
-compared without a noise floor; and a units error kept the warmup in every
-check. The first draft of this correction repeated the pattern: it recommended
+compared without a noise floor; and a units error kept the warmup in three of
+the four checks. The first draft of this correction repeated the pattern: it recommended
 tighter LINCS settings on the strength of the drift alone, without running the
 four checks on them, and those settings fail. Replicated runs, a noise floor for
 every reported quantity, running every check on every recommended setting, and
@@ -257,16 +265,20 @@ same-batch timing are what caught these errors. We recommend all four for any
 claim of this kind.
 
 Constraining every bond is not a neutral choice: holonomic constraints change
-the configurational distribution, not only the dynamics, which fits the small
-systematic shifts we measured at dt 6 fs.
+the protein's configurational distribution, not only its dynamics. That does not
+explain the shifts we measured, which are in water density and structure; water
+is rigid in every run, and the search shows no extra density shift from all-bond
+constraints at dt 4 fs. The cause of the dt 6 fs shifts is not established.
 
 # Conclusion
 
 For villin on a CPU, plain dt 4 fs with h-bonds (about 1.9x) passes the four
-checks with the smallest systematic shifts. dt 6 fs with HMR factor 3,
+checks with the smallest density and drift shifts. dt 6 fs with HMR factor 3,
 `constraints = all-bonds` and default LINCS settings (about 2.7x) also passes,
-with small measurable shifts in density, water structure and drift; it suits
-questions those shifts do not affect. Tightening LINCS on it makes it fail. Both
+with small measurable shifts in density (+0.3 %) and drift (-0.006); both
+settings shift the water structure by similar amounts. It suits questions those
+shifts do not affect. With tightened LINCS settings it fails the checks in 6 of
+9 comparisons. Both
 are results for one small protein on one machine and need validation on other
 systems. A spherical shell reaches 4.6-8.8x but must be labelled a model change.
 

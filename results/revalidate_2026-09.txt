@@ -30,11 +30,8 @@ Four-check verdicts, each candidate run against each reference seed:
   rec7_lincs8_s11    0/3  FAIL: rdf max deviation 0.0348 exceeds 0.02 | FAIL: density 0.73% from reference exceeds 0.5%; rdf max deviation 0.0291 exceeds 0.02 | FAIL: density 0.76% from reference exceeds 0.5%; rdf max deviation 0.0298 exceeds 0.02
   rec7_s11           2/3  FAIL: rdf max deviation 0.0222 exceeds 0.02 | pass | pass
 
-Timing (ns/day, 4 OpenMP threads, runs in sequence on one machine):
-  2 fs reference                    56.3 (sd   9.9, n=3)   speedup 1.00x
-  plain dt 4 fs, h-bonds           107.7 (sd  16.3, n=3)   speedup 1.91x
-  dt 6 fs, HMR f3, all-bonds       160.7 (sd   6.0, n=3)   speedup 2.85x
-  dt 6 fs, ..., LINCS 8/2          117.8 (sd  18.2, n=3)   speedup 2.09x
+Timing: not reported here. These runs were not timed under one
+controlled batch; see experiments/timing.py and results/timing_2026-09.txt.
 
 Energy drift, kJ/mol/ps per atom (whole run / production only):
   plain4_s11                 0.00114 /   0.00107

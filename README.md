@@ -121,10 +121,13 @@ fixed.
 4. Mean density within 0.5 % of the reference mean.
 
 Temperature, density and the RDF discard the first 2000 steps, and `mdrun` gets
-`-resetstep 2000` so the timing excludes them too. Up to v0.2.0 a units error
-(`fastmode.warmup_time_ps`) skipped only the first frame, so the committed audit,
-search and selfcheck results include the first 4 ps of each 200 ps run. The
-re-validation results use the corrected code.
+`-resetstep 2000` so the timing excludes them too. 
+Up to v0.2.0 a units error skipped only the first frame of the warmup. The
+warmup is 2000 steps, so its length grows with the timestep (4 ps at 2 fs, 8 ps
+at 4 fs, 14 ps at 7 fs), and each run is that warmup plus the production time.
+The committed audit, search and selfcheck results therefore average over the
+warmup as well; for a 20 ps search screen at dt 7 fs it was 14 of 34 ps.
+`fastmode.warmup_time_ps` holds the fix, and the re-validation uses it.
 
 What the checks do not cover: the RDF and density are water properties, so on a
 protein system they test the solvent, not the protein. Use `valprotein.py` or
@@ -174,8 +177,8 @@ subtracting the sweep's own OpenMP threads from the 1-minute load average. If
 any contributing run was untimed, the report withholds the speedup.
 
 This rule does not make timings comparable across batches. The same 2 fs villin
-reference measured 69.6 ns/day in the audit batch, 46.8 in the search batch and
-64.8 in the shell batch. Compare a speedup only with the reference timed in the
+reference has measured between 45.1 and 69.6 ns/day across batches: 69.6 in the
+audit, 46.8 in the search and 64.8 in the shell batch. Compare a speedup only with the reference timed in the
 same batch. `experiments/timing.py` times settings in interleaved rounds for
 that reason; its own runs exceeded the load limit, as the re-validation section
 records.
@@ -196,7 +199,9 @@ estimate. The temperature floor on small water (0.93 K) nearly equals the 1 K
 limit, so a correct setting can fail the temperature check by chance, and a
 close temperature failure is not proof of a bad setting. These floors were
 measured with the warmup-exclusion error described above. The re-validation
-below adds a second, independent villin floor measured with the corrected code.
+below measures a second villin floor with the corrected code. Its density floor
+(up to 0.26 %) is about 2.5 times the selfcheck value (0.103 %), so a floor from
+three samples is a rough guide.
 
 ## Results: the audit
 
@@ -232,7 +237,9 @@ Failures worth recording, each with its number:
   `nstlist 50` and tolerance 0.05 fails temperature at 298.90 K (floor 0.931 K).
   These are single samples.
 
-`run_timed.sh` reproduces the audit.
+`run_timed.sh` reruns the audit. With the v0.2.0 HMR default (3.0 instead of 4.0)
+the villin run takes a different path from the committed v0.1.0 results, in
+which HMR at dt 4 fs was rejected by `grompp`.
 
 ## Where the limits are
 
@@ -275,10 +282,12 @@ motion sets the dt 8 fs limit.
 **LINCS accuracy trades drift against structure.** At dt 6 fs with all-bonds,
 the default LINCS settings (order 4, one iteration) give a drift of -0.0061 in
 all three re-validation seeds, a systematic bias that plain dt 4 fs does not
-show (+0.0011). `lincs-order = 8` with `lincs-iter = 2` removes it (+0.0010),
-but moves the water structure and density further from the reference, far
-enough to fail the RDF or density check in 6 of 9 comparisons (see below). We
-have not established why. Default LINCS is the setting that passes.
+show (+0.0011). `lincs-order = 8` with `lincs-iter = 2` removes it (+0.0010)
+but moves the water structure further from the reference (RDF deviation 0.017 to
+0.025, against 0.010 to 0.014), and the setting fails the RDF or density check in
+6 of 9 comparisons (see below). Its larger density shift (+0.38 % against
++0.30 %) is within the noise. We have not established why. Default LINCS is the
+setting that passes.
 
 **`all-angles` constraints fail on every setting.** Each run stops with too many
 LINCS warnings (1458 at dt 4 fs). Angle constraints couple many constraints
@@ -318,10 +327,10 @@ What this shows, and what it does not:
   the density by about 0.3 % in all three seeds, above the floor, and one of its
   seeds has an Rg 1.7 % above the reference mean. Its drift carries the LINCS
   bias described above. These are small, systematic effects inside the limits.
-- The protein RMSF correlations of all candidates overlap the
-  reference-to-reference range, but plain dt 4 fs reaches as low as 0.67, below
-  the lowest reference pair (0.83). Three runs per setting cannot resolve RMSF
-  differences of this size.
+- Every candidate group has RMSF correlations below the lowest reference pair
+  (0.83): plain dt 4 fs reaches 0.67, dt 6 fs with default LINCS 0.81, and with
+  tight LINCS 0.72. Three runs per setting cannot resolve RMSF differences of
+  this size.
 - The nine comparisons per setting share three candidate runs and three
   references, so they are not nine independent tests.
 
@@ -338,7 +347,7 @@ median and range.
 | dt 4 fs, h-bonds                               | 1.93x (range 1.54-1.94x) |
 | dt 6 fs, HMR 3, all-bonds, default LINCS       | 2.67x (range 2.13-2.70x) |
 | dt 6 fs, HMR 3, all-bonds, tight LINCS         | 2.56x (range 2.09-2.60x) |
-| dt 7 fs, HMR 3, all-bonds, tight LINCS         | 2.97x (range 2.37-3.01x) |
+| dt 7 fs, HMR 3, all-bonds, tight LINCS (fails the checks) | 2.97x (range 2.37-3.01x) |
 
 These runs broke the tool's own timing rule: the machine carried other work,
 with an external load of up to about 3.4 against the 2.0 limit. Interleaving
@@ -346,12 +355,14 @@ exposes every setting to the same background, so the ratios are usable, but
 the absolute ns/day are low and the ranges are wide. Treat the speedups as
 approximate.
 
-**Recommendation.** For villin on a CPU, dt 4 fs with h-bonds (about 1.9x) is the
-setting with the smallest systematic shifts. dt 6 fs with HMR factor 3 and
+**Recommendation.** For villin on a CPU, dt 4 fs with h-bonds (about 1.9x) has the
+smallest density and drift shifts. dt 6 fs with HMR factor 3 and
 `constraints = all-bonds` at default LINCS settings (about 2.7x) passes every
-check but shifts density, water structure and drift by small, measurable
-amounts; use it if those shifts do not matter for your observables. Validate
-either on your own system.
+check but shifts density (+0.3 %) and drift (-0.006) by small, measurable
+amounts. Both settings shift the water structure by similar amounts, and neither
+shows a resolved change in protein flexibility with three runs. Use dt 6 fs
+where those shifts do not matter for your observables, do not tighten its LINCS
+settings without re-validating, and validate either setting on your own system.
 
 ## Brute-force search (`search.py`)
 

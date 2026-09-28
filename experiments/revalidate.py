@@ -191,13 +191,8 @@ def summarize(recs, natoms):
         lines.append(f"  {name:<18} {n_pass}/{len(refs)}  " + " | ".join(verdicts))
     lines.append("")
 
-    lines.append("Timing (ns/day, 4 OpenMP threads, runs in sequence on one machine):")
-    ref_speed = [r["ns_per_day"] for r in refs]
-    for g, key in [("2 fs reference", "ref")] + groups:
-        sp = [ok[f"{key}_s{s}"]["ns_per_day"] for s in SEEDS if f"{key}_s{s}" in ok]
-        ratio = np.mean(sp) / np.mean(ref_speed)
-        lines.append(f"  {g:<30} {np.mean(sp):7.1f} (sd {np.std(sp, ddof=1):5.1f}, n={len(sp)})"
-                     f"   speedup {ratio:.2f}x")
+    lines.append("Timing: not reported here. These runs were not timed under one")
+    lines.append("controlled batch; see experiments/timing.py and results/timing_2026-09.txt.")
     lines.append("")
 
     lines.append("Energy drift, kJ/mol/ps per atom (whole run / production only):")
@@ -219,7 +214,17 @@ def main():
     ap.add_argument("--gmx", required=True)
     ap.add_argument("--ntomp", type=int, default=4)
     ap.add_argument("--ref-ps", type=float, default=200.0)
+    ap.add_argument("--summary-only", action="store_true",
+                    help="rewrite revalidate.txt from revalidate.json, no runs")
     args = ap.parse_args()
+    if args.summary_only:
+        out = os.path.abspath(args.out)
+        recs = json.load(open(os.path.join(out, "revalidate.json")))
+        text = summarize(recs, fm.read_gro_natoms(os.path.abspath(args.gro)))
+        with open(os.path.join(out, "revalidate.txt"), "w") as fh:
+            fh.write(text)
+        print(text)
+        return
 
     out = os.path.abspath(args.out)
     os.makedirs(out, exist_ok=True)

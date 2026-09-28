@@ -10,7 +10,7 @@ residue and atom names read from the topology it used.
 No simulation runs; each grompp call takes seconds.
 
 Usage:
-    python experiments/grompp_limits.py --gmx <gmx> [--out results/grompp_limits.txt]
+    python experiments/grompp_limits.py --gmx <gmx> [--out results/grompp_limits_2026-09.txt]
 """
 import argparse
 import os
@@ -47,7 +47,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--gmx", default=fm.GMX_DEFAULT)
-    ap.add_argument("--out", default=os.path.join(REPO, "results", "grompp_limits.txt"))
+    ap.add_argument("--out", default=os.path.join(REPO, "results", "grompp_limits_2026-09.txt"))
     args = ap.parse_args()
 
     conf = os.path.join(VILLIN, "eq.gro")
