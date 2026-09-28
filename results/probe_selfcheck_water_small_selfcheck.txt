@@ -1,7 +1,7 @@
 fastmode selfcheck report
 =========================
-system       : ../phase2/npt_3.0.gro
-topology     : ../phase2/topol_3.0.top
+system       : systems/npt_3.0.gro
+topology     : systems/topol_3.0.top
 atoms        : 2652
 samples      : 3 independent 2 fs runs, 200 ps each
 seeds        : 1 .. 3

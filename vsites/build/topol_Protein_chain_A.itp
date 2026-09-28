@@ -9,9 +9,9 @@
 ;	Created by:
 ;	          :-) GROMACS - gmx pdb2gmx, 2027.0-dev-20260910-a97258a (-:
 ;	
-;	Executable:   /Users/danielreda/apps/gromacs-perf/phase0/vsites/build/../../../build/bin/gmx
-;	Data prefix:  /Users/danielreda/apps/gromacs-perf/gromacs (source tree)
-;	Working dir:  /Users/danielreda/apps/gromacs-perf/phase0/vsites/build
+;	Executable:   <project>/phase0/vsites/build/../../../build/bin/gmx
+;	Data prefix:  <project>/gromacs (source tree)
+;	Working dir:  <project>/phase0/vsites/build
 ;	Command line:
 ;	  gmx pdb2gmx -f ../../../phase2b/1yrf.pdb -vsite h -heavyh -ff amber99sb -water tip3p -ignh -o prot.gro -p topol.top -i posre.itp
 ;	Force field was read from the standard GROMACS share directory.

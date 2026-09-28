@@ -1,5 +1,5 @@
 {
-  "system": "/Users/danielreda/apps/gromacs-perf/phase2/npt_4.5.gro",
+  "system": "systems/npt_4.5.gro",
   "atoms": 8916,
   "reference": {
     "spec": {
@@ -10,7 +10,7 @@
       "tol": 0.005
     },
     "label": "dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
-    "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/water_medium/runs/reference/dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
+    "workdir": "<project>/phase0/out/water_medium/runs/reference/dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
     "timed": true,
     "rejected": false,
     "pass": true,
@@ -236,7 +236,7 @@
         "tol": 0.005
       },
       "label": "dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/water_medium/runs/reference/dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/water_medium/runs/reference/dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -461,7 +461,7 @@
         "tol": 0.005
       },
       "label": "dt3fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/water_medium/runs/runs/dt3fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/water_medium/runs/runs/dt3fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -686,7 +686,7 @@
         "tol": 0.005
       },
       "label": "dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/water_medium/runs/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/water_medium/runs/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -911,7 +911,7 @@
         "tol": 0.005
       },
       "label": "dt5fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -1136,7 +1136,7 @@
         "tol": 0.005
       },
       "label": "dt5fs_hmroff_mtspme2_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtspme2_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtspme2_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -1361,7 +1361,7 @@
         "tol": 0.005
       },
       "label": "dt5fs_hmroff_mtspme3_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtspme3_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtspme3_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -1591,7 +1591,7 @@
         "tol": 0.005
       },
       "label": "dt5fs_hmroff_mtspme2_nstlist25_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtspme2_nstlist25_tol0.005",
+      "workdir": "<project>/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtspme2_nstlist25_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -1816,7 +1816,7 @@
         "tol": 0.005
       },
       "label": "dt5fs_hmroff_mtspme2_nstlist50_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtspme2_nstlist50_tol0.005",
+      "workdir": "<project>/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtspme2_nstlist50_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -2041,7 +2041,7 @@
         "tol": 0.005
       },
       "label": "dt5fs_hmroff_mtspme2_nstlist100_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtspme2_nstlist100_tol0.005",
+      "workdir": "<project>/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtspme2_nstlist100_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -2266,7 +2266,7 @@
         "tol": 0.05
       },
       "label": "dt5fs_hmroff_mtspme2_nstlist50_tol0.05",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtspme2_nstlist50_tol0.05",
+      "workdir": "<project>/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtspme2_nstlist50_tol0.05",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -2492,7 +2492,7 @@
       "tol": 0.005
     },
     "label": "dt5fs_hmroff_mtsoff_nstlist10_tol0.005",
-    "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtsoff_nstlist10_tol0.005",
+    "workdir": "<project>/phase0/out/water_medium/runs/runs/dt5fs_hmroff_mtsoff_nstlist10_tol0.005",
     "timed": true,
     "rejected": false,
     "pass": true,

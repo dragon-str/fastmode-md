@@ -1,0 +1,10 @@
+Interleaved timing, villin HP-35, 4 OpenMP threads
+5 rounds x 5 settings, 10000 steps each, counters reset after 2000 steps
+1-minute load average over the batch: 3.19 to 7.38
+
+  setting                                            median ns/day  speedup median          range
+  2 fs reference                                              47.4           1.00x   1.00-1.00x
+  dt 4 fs, h-bonds                                            90.4           1.93x   1.54-1.94x
+  dt 6 fs, HMR f3, all-bonds, default LINCS                  125.8           2.67x   2.13-2.70x
+  dt 6 fs, HMR f3, all-bonds, LINCS order 8 iter 2           120.7           2.56x   2.09-2.60x
+  dt 7 fs, HMR f3, all-bonds, LINCS order 8 iter 2           139.1           2.97x   2.37-3.01x

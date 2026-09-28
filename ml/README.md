@@ -1,10 +1,16 @@
-# ML fast-mode probe (`phase0/ml/`)
+# ML fast-mode probe (`ml/`)
 
 Question: can a model change give ~10x over the classical all-atom run, on this
 CPU, without a GPU? This directory holds the small experiments that answer it.
 
-Status: experiments 1 to 3 are done. The verdict is below. No result here changes
-any threshold in `phase0/fastmode.py`.
+No result here changes any threshold in `fastmode.py`.
+
+**Rerunning these probes.** They ran inside the original working tree, where this
+repository sat at `<project>/phase0/`. The scripts read inputs from that layout
+(`<project>/phase0/out/` for reference runs, `<project>/phase2/` for water boxes),
+which is not included here. The recorded outputs in this directory are the
+evidence. To rerun a probe, recreate that layout or edit the paths at the top of
+its script.
 
 ## Experiment 1 - step cost against net cost (`ceiling.py`)
 
@@ -141,12 +147,16 @@ artifact of one size.
 Consequence for a learned propagator: a step error of size `e` has a useful
 horizon of `ln(0.1/e) / 8` ps, which is `ln(0.1/e) / 0.016` steps at dt 2 fs.
 Even a perfect model with error 1e-6 nm holds for only 1.4 ps (720 steps). To
-stay accurate over a 200 ps run, the error must be about `0.1 * exp(-8*200)`,
-far below float64 precision. A pure learned propagator cannot serve as a long
-trajectory generator. The sound uses are a learned step coupled to a correct
-force, or an equilibrium sampler such as a Boltzmann generator, which does not
-need time-accurate paths. The horizon bounds every propagator method, so it is
-the first measurement any such method needs.
+stay on one exact path for 200 ps, the error must be about `0.1 * exp(-8*200)`,
+about 1e-696, far below float64 precision.
+
+That rules out a path-accurate learned propagator. It does not rule out a useful
+one. The 2 fs integrator itself leaves the exact path within a few Lyapunov times,
+and MD is still trusted, because what matters is that its statistics (the
+ensemble and the time correlations) are right. A learned propagator has to meet
+that statistical standard, and this probe does not test it. So the horizon
+bounds path accuracy only; it does not close the route. (Corrected 2026-09-27:
+v0.1.0 gave the bound as 1e-70 and called the route closed.)
 
 ## Experiment 8 - MTS failure map (`mtsres.py`)
 
@@ -237,8 +247,8 @@ model, since the box-frame trick works for only one fixed box.
 
 ## Experiment 11 - acceptance against displacement, three moves (`patchfrontier.py`)
 
-Deliverable from Claude: one plot, acceptance against RMS displacement, three
-curves, matched patch sizes, one exact scorer. The moves are a random jiggle
+Goal: one plot, acceptance against RMS displacement, three curves, matched patch
+sizes, one exact scorer. The moves are a random jiggle
 (`patch.py`), a rigid patch rotation (`phase2/surface_vs_volume.py`), and the
 learned residual.
 
@@ -324,10 +334,10 @@ proposal in this form. Making it legal removes more than it adds.
   the instantaneous local positions. A local position-only force model is closed.
   A model trained end-to-end to the next positions, not to forces, could still
   absorb these parts statistically, but that is a larger model off this CPU.
-  The Lyapunov probe (experiment 7) then closes the route: the trajectory
-  decorrelates in about 0.1 ps, so any per-step error larger than about 1e-70
-  ruins a 200 ps path. A learned step cannot replace the true force over a long
-  run. It can only sit inside a corrector, or sample equilibrium.
+  The Lyapunov probe (experiment 7) shows that no propagator, learned or not,
+  stays on one exact path beyond about 1 ps. That rules out path accuracy, which
+  MD does not provide either. Whether a learned propagator is statistically
+  accurate is untested here, so this route is open, not closed.
 - **Learned MTS splitting (idea 4):** closed. The instability is a resonance at a
   slow-force update interval near 15 fs (experiment 8), not a smooth force bias,
   so a learned correction cannot remove it without changing the splitting.

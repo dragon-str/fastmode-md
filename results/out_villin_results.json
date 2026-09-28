@@ -1,5 +1,5 @@
 {
-  "system": "/Users/danielreda/apps/gromacs-perf/phase2b/eq.gro",
+  "system": "systems/villin/eq.gro",
   "atoms": 14528,
   "reference": {
     "spec": {
@@ -10,7 +10,7 @@
       "tol": 0.005
     },
     "label": "dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
-    "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/reference/dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
+    "workdir": "<project>/phase0/out/villin/runs/reference/dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
     "timed": true,
     "rejected": false,
     "pass": true,
@@ -236,7 +236,7 @@
         "tol": 0.005
       },
       "label": "dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/reference/dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/reference/dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -461,7 +461,7 @@
         "tol": 0.005
       },
       "label": "dt3fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt3fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt3fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -686,7 +686,7 @@
         "tol": 0.005
       },
       "label": "dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -911,7 +911,7 @@
         "tol": 0.005
       },
       "label": "dt5fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt5fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt5fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": true,
       "pass": false,
@@ -928,7 +928,7 @@
         "tol": 0.005
       },
       "label": "dt2fs_hmron_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt2fs_hmron_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt2fs_hmron_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -1153,7 +1153,7 @@
         "tol": 0.005
       },
       "label": "dt3fs_hmron_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt3fs_hmron_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt3fs_hmron_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -1378,7 +1378,7 @@
         "tol": 0.005
       },
       "label": "dt4fs_hmron_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt4fs_hmron_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt4fs_hmron_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": true,
       "pass": false,
@@ -1395,7 +1395,7 @@
         "tol": 0.005
       },
       "label": "dt5fs_hmron_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt5fs_hmron_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt5fs_hmron_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": true,
       "pass": false,
@@ -1412,7 +1412,7 @@
         "tol": 0.005
       },
       "label": "dt4fs_hmroff_mtspme2_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt4fs_hmroff_mtspme2_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt4fs_hmroff_mtspme2_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -1637,7 +1637,7 @@
         "tol": 0.005
       },
       "label": "dt4fs_hmroff_mtspme3_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt4fs_hmroff_mtspme3_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt4fs_hmroff_mtspme3_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -1654,7 +1654,7 @@
         "tol": 0.005
       },
       "label": "dt4fs_hmroff_mtspme2_nstlist25_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt4fs_hmroff_mtspme2_nstlist25_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt4fs_hmroff_mtspme2_nstlist25_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -1879,7 +1879,7 @@
         "tol": 0.005
       },
       "label": "dt4fs_hmroff_mtspme2_nstlist50_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt4fs_hmroff_mtspme2_nstlist50_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt4fs_hmroff_mtspme2_nstlist50_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -2104,7 +2104,7 @@
         "tol": 0.005
       },
       "label": "dt4fs_hmroff_mtspme2_nstlist100_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt4fs_hmroff_mtspme2_nstlist100_tol0.005",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt4fs_hmroff_mtspme2_nstlist100_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -2329,7 +2329,7 @@
         "tol": 0.05
       },
       "label": "dt4fs_hmroff_mtspme2_nstlist50_tol0.05",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt4fs_hmroff_mtspme2_nstlist50_tol0.05",
+      "workdir": "<project>/phase0/out/villin/runs/runs/dt4fs_hmroff_mtspme2_nstlist50_tol0.05",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -2555,7 +2555,7 @@
       "tol": 0.005
     },
     "label": "dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
-    "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/out/villin/runs/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
+    "workdir": "<project>/phase0/out/villin/runs/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
     "timed": true,
     "rejected": false,
     "pass": true,

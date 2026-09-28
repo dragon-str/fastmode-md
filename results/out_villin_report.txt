@@ -1,7 +1,7 @@
 fastmode audit report
 =====================
-system       : ../phase2b/eq.gro
-topology     : ../phase2b/topol.top
+system       : systems/villin/eq.gro
+topology     : systems/villin/topol.top
 atoms        : 14528
 reference    : dt 2 fs, hmr off, mts off, nstlist 10, tol 0.005
 production   : 200 ps per run, 2000 warmup steps

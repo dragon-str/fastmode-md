@@ -18,9 +18,7 @@ import numpy as np
 import spherical as sp
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PROJECT = os.path.dirname(HERE)
-GMX = os.environ.get("GMX", os.path.join(PROJECT, "build", "bin", "gmx"))
-GMXLIB = os.environ.get("GMXLIB", os.path.join(PROJECT, "gromacs", "share", "top"))
+GMX = os.environ.get("GMX") or shutil.which("gmx") or "gmx"
 
 BOUNDARY_ITP = """[ moleculetype ]
 ; name  nrexcl
@@ -51,7 +49,6 @@ BWA     2
 
 def run(cmd, cwd, stdin=None):
     env = dict(os.environ)
-    env["GMXLIB"] = GMXLIB
     return subprocess.run(cmd, cwd=cwd, input=stdin, text=True,
                           capture_output=True, env=env)
 
@@ -115,7 +112,7 @@ def build(args):
     with open(os.path.join(args.out, "boundary.itp"), "w") as fh:
         fh.write(BOUNDARY_ITP.format(k=args.k))
 
-    src = os.path.join(PROJECT, "phase2b", "topol.top")
+    src = os.path.join(HERE, "systems", "villin", "topol.top")
     if args.top:
         src = args.top
     top = open(src).read()
@@ -131,7 +128,7 @@ def build(args):
     with open(os.path.join(args.out, "topol.top"), "w") as fh:
         fh.write(top)
     for f in ("posre.itp",):
-        s = os.path.join(PROJECT, "phase2b", f)
+        s = os.path.join(HERE, "systems", "villin", f)
         if os.path.exists(s):
             shutil.copy(s, os.path.join(args.out, f))
 
@@ -204,7 +201,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     sub = ap.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build")
-    b.add_argument("--gro", default=os.path.join(PROJECT, "phase2b", "eq.gro"))
+    b.add_argument("--gro", default=os.path.join(HERE, "systems", "villin", "eq.gro"))
     b.add_argument("--top", default=None)
     b.add_argument("--out", default=os.path.join(HERE, "softshell"))
     b.add_argument("--shell", type=float, default=1.2)

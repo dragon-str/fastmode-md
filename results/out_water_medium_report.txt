@@ -1,7 +1,7 @@
 fastmode audit report
 =====================
-system       : ../phase2/npt_4.5.gro
-topology     : ../phase2/topol_4.5.top
+system       : systems/npt_4.5.gro
+topology     : systems/topol_4.5.top
 atoms        : 8916
 reference    : dt 2 fs, hmr off, mts off, nstlist 10, tol 0.005
 production   : 200 ps per run, 2000 warmup steps

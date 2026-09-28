@@ -32,8 +32,10 @@ softshell/
 softshell_k200/
 validate10x_v2/
 
-# Keep the input system
+# Keep the input systems
 !systems/*.gro
+!systems/villin/eq.gro
+!vsites/build/eq.gro
 
 # OS
 .DS_Store

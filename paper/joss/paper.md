@@ -14,15 +14,15 @@ authors:
 affiliations:
   - name: Independent researcher
     index: 1
-date: 12 September 2026
+date: 27 September 2026
 bibliography: paper.bib
 ---
 
 # Summary
 
-`fastmode-md` is a command-line tool that finds the fastest safe integration
-settings for a molecular dynamics (MD) system and proves the result against a
-reference run. It is written in Python 3, depends only on NumPy, and drives the
+`fastmode-md` is a command-line tool that searches integration settings for a
+molecular dynamics (MD) system and checks each candidate against a reference
+run of the same system. It is written in Python 3, depends only on NumPy, and drives the
 user's existing GROMACS installation [@abraham2015gromacs;
 @vanderspoel2005gromacs].
 
@@ -51,8 +51,10 @@ a timestep that exceeds a bond's oscillation limit, but it does not tell the
 user whether the settings that did run are correct.
 
 Existing guides and benchmarks describe which settings are fast on a given
-machine. They rarely test whether the settings that a user actually selected
-reproduce a reference. `fastmode-md` fills that gap. It turns the choice of
+machine. Systematic tests of physical validity also exist:
+`physical_validation` [@merz2018physical] tests integrator convergence and
+ensemble validity. `fastmode-md` is narrower: it searches over integration
+settings and compares every candidate with a same-system reference. It turns the choice of
 integration settings into a measurement on the user's own system, with a
 recorded verdict and a recorded number.
 
@@ -63,8 +65,9 @@ The tool has three subcommands: `audit`, `selfcheck`, and `hmr-check`.
 ## audit
 
 `fastmode audit` runs a 2 fs reference and then a sweep of candidates. The sweep
-varies the timestep, HMR, MTS, the neighbour-list update interval, the Verlet
-buffer tolerance, the constraint set, and the use of virtual sites. Every
+varies the timestep, HMR, MTS, the neighbour-list update interval and the Verlet
+buffer tolerance, with h-bond constraints. Separate scripts extend the search to
+all-bond constraints (`search.py`) and to virtual sites (`stage2.py`). Every
 candidate is compared with the reference on four checks:
 
 1. conserved energy drift below 0.02 kJ/mol/ps per atom,
@@ -80,9 +83,10 @@ fastest passing candidate.
 
 A threshold is meaningless without the measurement scatter. `fastmode
 selfcheck` runs independent replicas of the reference with different velocity
-seeds and compares them. It reports the noise floor of each check. A difference
-comparable to the floor is reported as unresolved, not as a pass. The user can
-then see whether a check can resolve the effect that it is meant to test.
+seeds and compares them. It reports the noise floor of each check: the largest
+difference between any two replicas. The audit verdict itself is a fixed
+threshold comparison and does not use the floor, so the user compares a close
+result with the floor to judge whether a check can resolve it.
 
 ## hmr-check
 
@@ -111,12 +115,19 @@ performance is recorded only as supporting evidence for the verdict.
 
 # Limitations
 
+Version 0.1.0 of the accompanying methods note drew a wrong conclusion about the
+protein settings, which a later review found and version 0.2.0 corrects; the
+tool's checks were not at fault, but single runs without a noise floor were.
 The four checks are necessary but not sufficient. They test energy drift, the
 temperature, the solvent structure, and the density. They do not test every
 observable, and a user with a different scientific question should add a check
 for that question. The default limits and the default production length are set
 for the systems in the accompanying study; the `selfcheck` mode exists so that a
 user can measure the floors on a different system before trusting a verdict.
+
+# AI usage
+
+AI coding agents (Claude models from Anthropic, and DeepSeek V4.1 Flash served by Fireworks AI) wrote most of the code, ran the simulations and drafted the text, working from the author's written specification. An AI reviewer found the errors that version 0.2.0 corrects. The author directed the work and is responsible for its content. See `AI_USAGE.md` in the repository.
 
 # Acknowledgements
 

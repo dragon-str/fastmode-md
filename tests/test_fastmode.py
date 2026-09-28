@@ -173,7 +173,7 @@ def test_build_mdp_mts_is_multiple_of_factor():
 def test_setting_label():
     spec = {"dt": 0.005, "hmr": True, "mts": 0, "nstlist": 10, "tol": 0.005,
             "constraints": "all-bonds"}
-    assert fastmode.setting_label(spec) == "dt5fs_hmron_mtsoff_nstlist10_tol0.005_allbonds"
+    assert fastmode.setting_label(spec) == "dt5fs_hmron_mtsoff_nstlist10_tol0.005_f3_allbonds"
 
 
 def test_vary_does_not_mutate():

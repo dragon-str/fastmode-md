@@ -23,16 +23,14 @@ import time
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PROJECT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import fastmode as fm  # noqa: E402
 import spherical as sp  # noqa: E402
 import valprotein as vp  # noqa: E402
 
-GMX = os.environ.get("GMX", os.path.join(PROJECT, "build", "bin", "gmx"))
-GMXLIB = os.environ.get("GMXLIB", os.path.join(PROJECT, "gromacs", "share", "top"))
+GMX = os.environ.get("GMX") or shutil.which("gmx") or "gmx"
 
-EQ = os.path.join(PROJECT, "phase2b")
+EQ = os.path.join(HERE, "systems", "villin")
 V3 = os.path.join(HERE, "spherical_v3")
 
 CONFIGS = {
@@ -59,7 +57,7 @@ RDF_REF = {"shellRF_dt4_allbonds": "shellPME_dt4_allbonds"}
 
 
 def run(cmd, cwd, stdin=None):
-    env = dict(os.environ, GMXLIB=GMXLIB)
+    env = dict(os.environ)
     return subprocess.run(cmd, cwd=cwd, env=env, input=stdin, text=True, capture_output=True)
 
 

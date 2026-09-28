@@ -1,0 +1,36 @@
+fastmode re-validation, villin HP-35 (14528 atoms)
+================================================
+
+Differences from the 2 fs references. The first column is the noise
+floor: every pair of independent 2 fs references. The others compare
+each candidate seed with each reference seed. min / mean / max over pairs.
+
+  quantity                       2 fs vs 2 fs         plain dt 4 fs, h-bonds     dt 6 fs, HMR f3, all-bonds
+  temperature (K)      0.1360/ 0.4362/ 0.6543     0.0159/ 0.2729/ 0.6384     0.0715/ 0.3382/ 0.5828
+  density (%)          0.0234/ 0.1731/ 0.2596     0.0417/ 0.1563/ 0.3014     0.1265/ 0.2960/ 0.3979
+  O-O RDF max dev      0.0022/ 0.0042/ 0.0055     0.0074/ 0.0107/ 0.0158     0.0101/ 0.0117/ 0.0132
+  Rg (nm)              0.0038/ 0.0054/ 0.0081     0.0001/ 0.0034/ 0.0080     0.0010/ 0.0078/ 0.0200
+  RMSF correlation     0.8365/ 0.8650/ 0.9100     0.6778/ 0.8334/ 0.9496     0.8207/ 0.8942/ 0.9829
+
+Four-check verdicts against each reference seed (fastmode.validate):
+  plain dt 4 fs, h-bonds         passes 9 of 9 comparisons
+  dt 6 fs, HMR f3, all-bonds     passes 9 of 9 comparisons
+
+Timing (ns/day, 4 OpenMP threads, runs in sequence on one machine):
+  2 fs reference                    56.3 (sd   9.9, n=3)   speedup 1.00x
+  plain dt 4 fs, h-bonds           107.7 (sd  16.3, n=3)   speedup 1.91x
+  dt 6 fs, HMR f3, all-bonds       160.7 (sd   6.0, n=3)   speedup 2.85x
+
+Energy drift, kJ/mol/ps per atom (whole run / production only):
+  plain4_s11                 0.00114 /   0.00107
+  plain4_s12                 0.00105 /   0.00096
+  plain4_s13                 0.00118 /   0.00108
+  rec6_lincs8_s11            0.00100 /   0.00090
+  rec6_s11                  -0.00609 /  -0.00609
+  rec6_s12                  -0.00612 /  -0.00610
+  rec6_s13                  -0.00615 /  -0.00620
+  rec7_lincs8_s11            0.00300 /   0.00255
+  rec7_s11                  -0.00682 /  -0.00694
+  ref_s11                    0.00076 /   0.00079
+  ref_s12                    0.00080 /   0.00085
+  ref_s13                    0.00082 /   0.00088

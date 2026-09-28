@@ -1,11 +1,11 @@
 {
-  "system": "/Users/danielreda/apps/gromacs-perf/phase0/vsites/build/eq.gro",
+  "system": "<project>/phase0/vsites/build/eq.gro",
   "atoms": 14571,
   "space": {
     "gro": "vsites/build/eq.gro",
     "top": "vsites/build/topol.top",
     "out": "search_vsites",
-    "gmx": "/Users/danielreda/apps/gromacs-perf/build/bin/gmx",
+    "gmx": "<project>/build/bin/gmx",
     "ntomp": 4,
     "screen_ps": 20.0,
     "ref_ps": 200.0,
@@ -30,7 +30,7 @@
         "mass_scale": 1.0
       },
       "label": "dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/search_vsites/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -261,7 +261,7 @@
         "mass_scale": 1.0
       },
       "label": "dt4fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -492,7 +492,7 @@
         "mass_scale": 1.0
       },
       "label": "dt5fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt5fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/search_vsites/runs/dt5fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": true,
       "pass": false,
@@ -516,7 +516,7 @@
         "mass_scale": 1.0
       },
       "label": "dt5fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt5fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt5fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -747,7 +747,7 @@
         "mass_scale": 1.0
       },
       "label": "dt6fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt6fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/search_vsites/runs/dt6fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": true,
       "pass": false,
@@ -771,7 +771,7 @@
         "mass_scale": 1.0
       },
       "label": "dt6fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt6fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt6fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -1002,7 +1002,7 @@
         "mass_scale": 1.0
       },
       "label": "dt7fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt7fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/search_vsites/runs/dt7fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": true,
       "pass": false,
@@ -1026,7 +1026,7 @@
         "mass_scale": 1.0
       },
       "label": "dt7fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt7fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt7fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -1257,7 +1257,7 @@
         "mass_scale": 1.0
       },
       "label": "dt8fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt8fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/search_vsites/runs/dt8fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": true,
       "pass": false,
@@ -1281,7 +1281,7 @@
         "mass_scale": 1.0
       },
       "label": "dt8fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt8fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt8fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -1305,7 +1305,7 @@
         "mass_scale": 1.0
       },
       "label": "dt9fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt9fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/search_vsites/runs/dt9fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": true,
       "pass": false,
@@ -1329,7 +1329,7 @@
         "mass_scale": 1.0
       },
       "label": "dt9fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt9fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt9fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -1353,7 +1353,7 @@
         "mass_scale": 1.0
       },
       "label": "dt10fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt10fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/search_vsites/runs/dt10fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": true,
       "pass": false,
@@ -1377,7 +1377,7 @@
         "mass_scale": 1.0
       },
       "label": "dt10fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt10fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt10fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -1401,7 +1401,7 @@
         "mass_scale": 1.0
       },
       "label": "dt11fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt11fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/search_vsites/runs/dt11fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": true,
       "pass": false,
@@ -1425,7 +1425,7 @@
         "mass_scale": 1.0
       },
       "label": "dt11fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt11fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt11fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -1449,7 +1449,7 @@
         "mass_scale": 1.0
       },
       "label": "dt12fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt12fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/search_vsites/runs/dt12fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": true,
       "pass": false,
@@ -1473,7 +1473,7 @@
         "mass_scale": 1.0
       },
       "label": "dt12fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt12fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt12fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -1497,7 +1497,7 @@
         "mass_scale": 1.0
       },
       "label": "dt7fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt7fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt7fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": false,
@@ -1730,7 +1730,7 @@
         "mass_scale": 1.0
       },
       "label": "dt6fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt6fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt6fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -1961,7 +1961,7 @@
         "mass_scale": 1.0
       },
       "label": "dt5fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt5fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt5fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -2192,7 +2192,7 @@
         "mass_scale": 1.0
       },
       "label": "dt4fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+      "workdir": "<project>/phase0/search_vsites/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -2423,7 +2423,7 @@
         "mass_scale": 1.0
       },
       "label": "dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
-      "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
+      "workdir": "<project>/phase0/search_vsites/runs/dt4fs_hmroff_mtsoff_nstlist10_tol0.005",
       "timed": true,
       "rejected": false,
       "pass": true,
@@ -2705,7 +2705,7 @@
       "mass_scale": 1.0
     },
     "label": "dt6fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
-    "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/dt6fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
+    "workdir": "<project>/phase0/search_vsites/runs/dt6fs_hmroff_mtsoff_nstlist10_tol0.005_allbonds",
     "timed": true,
     "rejected": false,
     "pass": true,
@@ -2934,7 +2934,7 @@
       "tol": 0.005
     },
     "label": "dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
-    "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/reference_screen/dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
+    "workdir": "<project>/phase0/search_vsites/runs/reference_screen/dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
     "timed": true,
     "rejected": false,
     "pass": true,
@@ -3159,7 +3159,7 @@
       "tol": 0.005
     },
     "label": "dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
-    "workdir": "/Users/danielreda/apps/gromacs-perf/phase0/search_vsites/runs/reference_cert/dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
+    "workdir": "<project>/phase0/search_vsites/runs/reference_cert/dt2fs_hmroff_mtsoff_nstlist10_tol0.005",
     "timed": true,
     "rejected": false,
     "pass": true,

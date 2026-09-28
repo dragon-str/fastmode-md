@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fastmode-md"
-version = "0.1.0"
+version = "0.2.0"
 description = "Audit and validate fast-mode GROMACS integration settings against a 2 fs reference"
 authors = [{ name = "Daniel Reda" }]
 license = { text = "MIT" }

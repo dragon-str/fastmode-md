@@ -1,7 +1,7 @@
 fastmode audit report
 =====================
-system       : /Users/danielreda/apps/gromacs-perf/phase0/vsites/build/eq.gro
-topology     : /Users/danielreda/apps/gromacs-perf/phase0/vsites/runs/inputs/topol.top
+system       : <project>/phase0/vsites/build/eq.gro
+topology     : <project>/phase0/vsites/runs/inputs/topol.top
 atoms        : 14571
 reference    : dt 2 fs, hmr off, mts off, nstlist 10, tol 0.005
 production   : 200 ps per run, 2000 warmup steps

@@ -29,13 +29,13 @@ run() {
     echo "$name done $(date)" | tee -a "$OUT/run_timed.status"
 }
 
-run water_small  --gro ../phase2/npt_3.0.gro --top ../phase2/topol_3.0.top \
+run water_small  --gro systems/npt_3.0.gro --top systems/topol_3.0.top \
                  --out "$OUT/water_small"  --ref-ps 200
-run water_medium --gro ../phase2/npt_4.5.gro --top ../phase2/topol_4.5.top \
+run water_medium --gro systems/npt_4.5.gro --top systems/topol_4.5.top \
                  --out "$OUT/water_medium" --ref-ps 200
-run water_large  --gro ../phase2/npt_6.0.gro --top ../phase2/topol_6.0.top \
+run water_large  --gro systems/npt_6.0.gro --top systems/topol_6.0.top \
                  --out "$OUT/water_large"  --ref-ps 200
-run villin       --gro ../phase2b/eq.gro     --top ../phase2b/topol.top \
+run villin       --gro systems/villin/eq.gro --top systems/villin/topol.top \
                  --out "$OUT/villin"       --ref-ps 200
 
 echo "=== vsites $(date) ===" | tee -a "$OUT/run_timed.status"

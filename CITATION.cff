@@ -5,8 +5,8 @@ authors:
   - family-names: Reda
     given-names: Daniel
     orcid: "https://orcid.org/0000-0001-6160-6215"
-version: 0.1.0
-date-released: 2026-09-12
+version: 0.2.0
+date-released: 2026-09-27
 license: MIT
 url: "https://github.com/dragon-str/fastmode-md"
 doi: "10.17605/OSF.IO/X4T8M"

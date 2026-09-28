@@ -17,7 +17,7 @@ Python here.  Hydrogen virtual sites need a pdb2gmx rebuild and live in a
 separate stage (see stage2.py).  Water is skipped for repartition because SETTLE
 already makes it rigid.
 
-Style follows phase2/localdu.py: plain Python 3, numpy and the standard library.
+Plain Python 3, numpy and the standard library.
 """
 
 import argparse
@@ -35,11 +35,15 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROJECT = os.path.dirname(HERE)
-GMX_DEFAULT = os.path.join(PROJECT, "build", "bin", "gmx")
-GMXLIB_DEFAULT = os.path.join(PROJECT, "gromacs", "share", "top")
+# GROMACS binary: $GMX, else `gmx` on PATH.  GMXLIB is only set when $GMXLIB is.
+GMX_DEFAULT = os.environ.get("GMX") or shutil.which("gmx") or "gmx"
+GMXLIB_DEFAULT = os.environ.get("GMXLIB", "")
 
-# Mass repartition factor.  Standard HMR value.
-HMR_FACTOR = 4.0
+# Mass repartition factor: each solute hydrogen becomes 3x its mass
+# (1.008 -> 3.024 u), the common choice (Hopkins et al., JCTC 2015).  Version
+# 0.1.0 used 4.0, which lightens methyl carbons enough that grompp rejects
+# dt 4 fs on villin; see CHANGELOG.
+HMR_FACTOR = 3.0
 # Total-mass conservation tolerance for the repartition transform.
 MASS_TOL = 1e-6
 
@@ -51,7 +55,7 @@ LOAD_LIMIT = 2.0
 # Steps thrown away before timing, because GROMACS tunes PME during them.
 WARMUP_STEPS = 2000
 
-# Validation limits, from the handoff.
+# Validation limits.  Fixed; never tuned to a result.
 DRIFT_LIMIT = 0.02          # kJ/mol/ps per atom
 TEMP_LIMIT = 1.0            # K from the reference mean
 RDF_LIMIT = 0.02            # max absolute deviation
@@ -315,8 +319,10 @@ def setting_label(spec):
     label = (f"dt{int(round(spec['dt'] * 1000))}fs_hmr{hmr}"
              f"_mts{mts}"
              f"_nstlist{spec['nstlist']}_tol{spec['tol']}")
-    if spec.get("hmr") and spec.get("hmr_factor", HMR_FACTOR) != HMR_FACTOR:
-        label += f"_f{spec['hmr_factor']:g}"
+    # Always name the factor.  In v0.1.0 results a label with hmron and no _f
+    # suffix means the old default, factor 4.0.
+    if spec.get("hmr"):
+        label += f"_f{spec.get('hmr_factor', HMR_FACTOR):g}"
     if spec.get("seed") is not None:
         label += f"_seed{int(spec['seed'])}"
     cons = spec.get("constraints", "h-bonds")
@@ -329,12 +335,20 @@ def setting_label(spec):
 
 # ------------------------------------------------------------------- gromacs
 
+def gmx_env():
+    """Environment for GROMACS tools: GMXLIB only when the user set it."""
+    env = dict(os.environ)
+    if GMXLIB_DEFAULT:
+        env["GMXLIB"] = GMXLIB_DEFAULT
+    return env
+
+
 class Gmx:
     def __init__(self, binary, workdir, ntomp):
         self.binary = os.path.abspath(binary)
         self.workdir = workdir
         self.ntomp = ntomp
-        self.env = dict(os.environ, GMXLIB=os.environ.get("GMXLIB", GMXLIB_DEFAULT))
+        self.env = gmx_env()
 
     def _path(self, name):
         return os.path.join(self.workdir, name)
@@ -905,8 +919,9 @@ def main():
     a.add_argument("--out", required=True)
     a.add_argument("--gmx", default=GMX_DEFAULT)
     a.add_argument("--ntomp", type=int, default=4)
-    # 200 ps keeps the temperature noise floor near 0.5 K, below the 1 K check.
-    # At 50 ps the floor is about 1.1 K and correct settings fail.
+    # At 200 ps the measured temperature noise floor on small water is 0.93 K,
+    # just below the 1 K check, so some correct settings still fail by chance.
+    # At 50 ps the floor is about 1.1 K.
     a.add_argument("--ref-ps", type=float, default=200.0)
     a.add_argument("--strategy", choices=["staged", "grid"], default="staged")
     a.set_defaults(func=audit)

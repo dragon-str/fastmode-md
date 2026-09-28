@@ -1,6 +1,6 @@
 """Acceptance versus displacement for three local water moves (phase0/ml).
 
-Answers Claude's deliverable: one plot, acceptance against RMS displacement, for
+Produces one plot: acceptance against RMS displacement, for
 three moves scored by the same exact GROMACS potential at matched patch sizes.
 
   jiggle    every water gets its own random translation and rotation

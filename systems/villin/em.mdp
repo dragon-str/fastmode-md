@@ -1,0 +1,7 @@
+integrator = steep
+nsteps = 2000
+emtol = 500
+cutoff-scheme = Verlet
+coulombtype = PME
+rcoulomb = 1.0
+rvdw = 1.0

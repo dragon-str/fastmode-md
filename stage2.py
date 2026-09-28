@@ -10,8 +10,8 @@ Both the reference and the candidates use constraints = all-bonds.  With
 h-bonds alone, grompp refuses dt >= 5 fs: the carboxylate CG-OD1 bond has an
 oscillational period of 2.2e-02 ps, and no hydrogen transform can lengthen it.
 
-The rebuilt system is not the phase2b system.  Its numbers compare only with
-its own 2 fs reference, never with phase2b.
+The rebuilt system is not the systems/villin system.  Its numbers compare only
+with its own 2 fs reference, never with systems/villin.
 
 Usage:
     python3 stage2.py build           # pdb2gmx, editconf, solvate, genion, em, eq
@@ -29,11 +29,11 @@ from types import SimpleNamespace
 import fastmode as fm
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PROJECT = os.path.dirname(HERE)
 BUILD = os.path.join(HERE, "vsites", "build")
-PDB = os.path.join(PROJECT, "phase2b", "prot.pdb")
-EM_MDP = os.path.join(PROJECT, "phase2b", "em.mdp")
-IONS_MDP = os.path.join(PROJECT, "phase2b", "ions.mdp")
+VILLIN = os.path.join(HERE, "systems", "villin")
+PDB = os.path.join(VILLIN, "prot.pdb")
+EM_MDP = os.path.join(VILLIN, "em.mdp")
+IONS_MDP = os.path.join(VILLIN, "ions.mdp")
 DTS = [0.004, 0.005, 0.006, 0.007]
 
 EQ_MDP = """integrator      = md
@@ -70,7 +70,7 @@ def run(cmd, **kw):
 
 def build(gmx, ntomp):
     os.makedirs(BUILD, exist_ok=True)
-    env = dict(os.environ, GMXLIB=fm.GMXLIB_DEFAULT)
+    env = fm.gmx_env()
     md = [gmx, "mdrun", "-ntmpi", "1", "-ntomp", str(ntomp),
           "-nb", "cpu", "-pin", "off", "-resetstep", "2000"]
     run([gmx, "pdb2gmx", "-f", PDB, "-vsite", "h", "-heavyh",

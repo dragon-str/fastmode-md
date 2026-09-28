@@ -12,7 +12,7 @@ same system is then run at a large timestep with constraints = all-bonds to test
 whether the two gains stack.
 
 Usage:
-  python3 spherical.py build --gro ../phase2b/eq.gro --top ../phase2b/topol.top \
+  python3 spherical.py build --gro systems/villin/eq.gro --top systems/villin/topol.top \
       --out spherical --shell 1.0 --freeze 0.3
   python3 spherical.py run --out spherical
 """
@@ -27,9 +27,7 @@ import sys
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PROJECT = os.path.dirname(HERE)
-GMX = os.path.join(PROJECT, "build", "bin", "gmx")
-GMXLIB = os.path.join(PROJECT, "gromacs", "share", "top")
+GMX = os.environ.get("GMX") or shutil.which("gmx") or "gmx"
 KT = 2.4943
 NTOMP = 4
 
@@ -91,7 +89,7 @@ def mdp(dt, constraints, nsteps, coulomb="PME", rcoulomb=1.0, gen_seed=None):
 
 
 def run(cmd, cwd, stdin=None):
-    env = dict(os.environ, GMXLIB=GMXLIB)
+    env = dict(os.environ)
     return subprocess.run(cmd, cwd=cwd, env=env, input=stdin,
                           capture_output=True, text=True)
 
@@ -202,8 +200,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build")
-    b.add_argument("--gro", default=os.path.join(PROJECT, "phase2b", "eq.gro"))
-    b.add_argument("--top", default=os.path.join(PROJECT, "phase2b", "topol.top"))
+    b.add_argument("--gro", default=os.path.join(HERE, "systems", "villin", "eq.gro"))
+    b.add_argument("--top", default=os.path.join(HERE, "systems", "villin", "topol.top"))
     b.add_argument("--out", default=os.path.join(HERE, "spherical"))
     b.add_argument("--shell", type=float, default=1.0)
     b.add_argument("--freeze", type=float, default=0.3)

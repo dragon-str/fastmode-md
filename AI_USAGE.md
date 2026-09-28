@@ -1,40 +1,37 @@
 # AI usage disclosure
 
-This statement records the use of generative AI in the fastmode-md software and
-in its paper. It follows the disclosure requirements of the Journal of Open
-Source Software.
+This statement records how generative AI was used in fastmode-md and in its
+papers.
 
-## Tools and versions
+## Tools
 
-- Anthropic Claude, used through the `opencode` command-line tool. The model was
-  `deepseek-v4p1-flash` (Fireworks) for part of the work and a Claude model for
-  the rest. The exact model version is recorded in the session transcript.
+- Claude models (Anthropic), through Claude Code and the `opencode` command-line
+  tool.
+- DeepSeek V4.1 Flash (`deepseek-v4p1-flash`), served by Fireworks AI, through
+  `opencode`.
 
-## Nature and scope of the assistance
+## What AI did
 
-AI assistance was used for the following work:
+- **Code.** AI coding agents wrote most of the code in this repository,
+  including `fastmode.py`, the search harness, the validation and experiment
+  scripts, the machine-learning probes and the unit tests. They worked from a
+  written specification of the task, the four checks and their limits.
+- **Experiments.** AI agents ran the simulation sweeps and wrote the result
+  reports under `results/` and `ml/`.
+- **Text.** AI drafted `README.md`, `CONCLUSIONS.md`, the methods note, the JOSS
+  paper and their revisions.
+- **Review and correction.** In September 2026 an AI reviewer audited version
+  0.1.0 and found the errors listed in `CHANGELOG.md`. An AI agent checked each
+  finding against the committed data, ran the re-validation and timing
+  experiments, and wrote the corrections in version 0.2.0.
 
-- **Code:** generation and refactoring of utility functions, and generation of
-  the unit tests in `tests/`.
-- **Documentation:** drafting and copy-editing of `README.md`,
-  `CONTRIBUTING.md`, `CHANGELOG.md`, and the issue templates.
-- **Paper text:** drafting and copy-editing of this paper and of the methods
-  note in `paper/`.
-- **Packaging:** preparation of `pyproject.toml`, `CITATION.cff`, the release
-  archive, and the OSF deposit.
+## What the author did
 
-AI was **not** used for conversational interaction with JOSS editors or
-reviewers.
+The author set the problem and the written specification, chose the systems,
+directed the work, and reviewed the results. The author is responsible for the
+accuracy, originality and licensing of the software and the papers.
 
-## Core design decisions
-
-The scientific problem, the four validation checks, the limits that define a
-pass, the noise-floor method, and the choice of systems were specified by the
-human author. The human author made every decision about what counts as a
-correct simulation.
-
-## Confirmation of review
-
-The human author reviewed, edited, and validated all AI-assisted output. The
-human author is fully responsible for the accuracy, originality, licensing, and
-compliance of the software and the paper.
+Version 0.1.0 shipped a false central claim that passed through AI-written
+analysis and the author's review. An adversarial review of the released version
+caught it. We record this because it bears on how much review AI-assisted
+scientific work needs.
