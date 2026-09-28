@@ -10,7 +10,7 @@
 #   ./run_timed.sh --now    start immediately (use only on a quiet machine)
 set -u
 cd "$(dirname "$0")"
-export GMXLIB="$HOME/apps/gromacs-perf/gromacs/share/top"
+# Set GMX and, if your force fields are not in the GROMACS installation, GMXLIB.
 OUT=out
 mkdir -p "$OUT"
 

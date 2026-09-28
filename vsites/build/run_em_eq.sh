@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
-export GMXLIB=~/apps/gromacs-perf/gromacs/share/top
-G=../../../build/bin/gmx
+# Build-time record: this ran inside the original working tree.  Set G to your gmx.
+G=${GMX:-gmx}
 MD="$G mdrun -ntmpi 1 -ntomp 4 -nb cpu -pin off"
 $G grompp -f em.mdp -c solv_ions.gro -p topol.top -o em.tpr
 $MD -deffnm em -resetstep 2000

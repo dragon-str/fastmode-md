@@ -23,7 +23,9 @@ papers.
 - **Review and correction.** In September 2026 an AI reviewer audited version
   0.1.0 and found the errors listed in `CHANGELOG.md`. An AI agent checked each
   finding against the committed data, ran the re-validation and timing
-  experiments, and wrote the corrections in version 0.2.0.
+  experiments, and wrote the corrections. A second AI review of that correction
+  found further errors, including a wrong recommendation in its first draft,
+  which version 0.2.0 also corrects.
 
 ## What the author did
 

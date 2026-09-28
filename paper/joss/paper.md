@@ -116,8 +116,9 @@ performance is recorded only as supporting evidence for the verdict.
 # Limitations
 
 Version 0.1.0 of the accompanying methods note drew a wrong conclusion about the
-protein settings, which a later review found and version 0.2.0 corrects; the
-tool's checks were not at fault, but single runs without a noise floor were.
+protein settings, and the tool carried a units error that kept the warmup in
+three of the four checks. Independent AI review found both, and version 0.2.0
+corrects them.
 The four checks are necessary but not sufficient. They test energy drift, the
 temperature, the solvent structure, and the density. They do not test every
 observable, and a user with a different scientific question should add a check
@@ -132,7 +133,8 @@ AI coding agents (Claude models from Anthropic, and DeepSeek V4.1 Flash served b
 # Acknowledgements
 
 The author thanks the GROMACS developers for the simulation engine. The methods
-and the validation results are described in a separate methods note, deposited
-at <https://osf.io/x4t8m/>.
+and the validation results are described in a separate methods note
+(`paper/paper.pdf` in the repository). Its version 0.1.0, registered at DOI
+10.17605/OSF.IO/X4T8M, contains errors that version 0.2.0 corrects.
 
 # References

@@ -5,32 +5,49 @@ Differences from the 2 fs references. The first column is the noise
 floor: every pair of independent 2 fs references. The others compare
 each candidate seed with each reference seed. min / mean / max over pairs.
 
-  quantity                       2 fs vs 2 fs         plain dt 4 fs, h-bonds     dt 6 fs, HMR f3, all-bonds
-  temperature (K)      0.1360/ 0.4362/ 0.6543     0.0159/ 0.2729/ 0.6384     0.0715/ 0.3382/ 0.5828
-  density (%)          0.0234/ 0.1731/ 0.2596     0.0417/ 0.1563/ 0.3014     0.1265/ 0.2960/ 0.3979
-  O-O RDF max dev      0.0022/ 0.0042/ 0.0055     0.0074/ 0.0107/ 0.0158     0.0101/ 0.0117/ 0.0132
-  Rg (nm)              0.0038/ 0.0054/ 0.0081     0.0001/ 0.0034/ 0.0080     0.0010/ 0.0078/ 0.0200
-  RMSF correlation     0.8365/ 0.8650/ 0.9100     0.6778/ 0.8334/ 0.9496     0.8207/ 0.8942/ 0.9829
+  quantity                       2 fs vs 2 fs         plain dt 4 fs, h-bonds     dt 6 fs, HMR f3, all-bonds        dt 6 fs, ..., LINCS 8/2
+  temperature (K)      0.1789/ 0.4439/ 0.6658     0.0328/ 0.2762/ 0.6330     0.0344/ 0.3287/ 0.6314     0.0297/ 0.3299/ 0.7485
+  density (%)          0.0282/ 0.1749/ 0.2624     0.0449/ 0.1552/ 0.3074     0.1136/ 0.2989/ 0.4067     0.1706/ 0.3792/ 0.5539
+  O-O RDF max dev      0.0020/ 0.0043/ 0.0058     0.0076/ 0.0106/ 0.0158     0.0100/ 0.0118/ 0.0136     0.0170/ 0.0207/ 0.0254
+  Rg (nm)              0.0040/ 0.0055/ 0.0083     0.0002/ 0.0035/ 0.0080     0.0007/ 0.0080/ 0.0206     0.0004/ 0.0036/ 0.0086
+  RMSF correlation     0.8319/ 0.8618/ 0.9043     0.6729/ 0.8276/ 0.9485     0.8147/ 0.8914/ 0.9817     0.7168/ 0.8614/ 0.9729
 
-Four-check verdicts against each reference seed (fastmode.validate):
-  plain dt 4 fs, h-bonds         passes 9 of 9 comparisons
-  dt 6 fs, HMR f3, all-bonds     passes 9 of 9 comparisons
+Signed mean density difference from the references (%):
+  plain dt 4 fs, h-bonds         +0.105
+  dt 6 fs, HMR f3, all-bonds     +0.299
+  dt 6 fs, ..., LINCS 8/2        +0.379
+
+Four-check verdicts, each candidate run against each reference seed:
+  plain4_s11         3/3  pass | pass | pass
+  plain4_s12         3/3  pass | pass | pass
+  plain4_s13         3/3  pass | pass | pass
+  rec6_lincs8_s11    0/3  FAIL: rdf max deviation 0.0247 exceeds 0.02 | FAIL: density 0.53% from reference exceeds 0.5% | FAIL: density 0.55% from reference exceeds 0.5%
+  rec6_lincs8_s12    2/3  FAIL: rdf max deviation 0.0227 exceeds 0.02 | pass | pass
+  rec6_lincs8_s13    1/3  FAIL: rdf max deviation 0.0254 exceeds 0.02 | pass | FAIL: rdf max deviation 0.0204 exceeds 0.02
+  rec6_s11           3/3  pass | pass | pass
+  rec6_s12           3/3  pass | pass | pass
+  rec6_s13           3/3  pass | pass | pass
+  rec7_lincs8_s11    0/3  FAIL: rdf max deviation 0.0348 exceeds 0.02 | FAIL: density 0.73% from reference exceeds 0.5%; rdf max deviation 0.0291 exceeds 0.02 | FAIL: density 0.76% from reference exceeds 0.5%; rdf max deviation 0.0298 exceeds 0.02
+  rec7_s11           2/3  FAIL: rdf max deviation 0.0222 exceeds 0.02 | pass | pass
 
 Timing (ns/day, 4 OpenMP threads, runs in sequence on one machine):
   2 fs reference                    56.3 (sd   9.9, n=3)   speedup 1.00x
   plain dt 4 fs, h-bonds           107.7 (sd  16.3, n=3)   speedup 1.91x
   dt 6 fs, HMR f3, all-bonds       160.7 (sd   6.0, n=3)   speedup 2.85x
+  dt 6 fs, ..., LINCS 8/2          117.8 (sd  18.2, n=3)   speedup 2.09x
 
 Energy drift, kJ/mol/ps per atom (whole run / production only):
   plain4_s11                 0.00114 /   0.00107
   plain4_s12                 0.00105 /   0.00096
-  plain4_s13                 0.00118 /   0.00108
-  rec6_lincs8_s11            0.00100 /   0.00090
-  rec6_s11                  -0.00609 /  -0.00609
-  rec6_s12                  -0.00612 /  -0.00610
+  plain4_s13                 0.00118 /   0.00110
+  rec6_lincs8_s11            0.00100 /   0.00089
+  rec6_lincs8_s12            0.00101 /   0.00080
+  rec6_lincs8_s13            0.00105 /   0.00090
+  rec6_s11                  -0.00609 /  -0.00607
+  rec6_s12                  -0.00612 /  -0.00609
   rec6_s13                  -0.00615 /  -0.00620
-  rec7_lincs8_s11            0.00300 /   0.00255
-  rec7_s11                  -0.00682 /  -0.00694
+  rec7_lincs8_s11            0.00300 /   0.00254
+  rec7_s11                  -0.00682 /  -0.00690
   ref_s11                    0.00076 /   0.00079
   ref_s12                    0.00080 /   0.00085
   ref_s13                    0.00082 /   0.00088

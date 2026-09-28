@@ -1,0 +1,8 @@
+Shell timing from the validate10x replica runs (0.3 ns each, 4 OpenMP threads)
+Speedup = configuration mean ns/day over the periodic 2 fs reference mean, same batch.
+Shell runs use constraints = all-bonds without HMR; the reference uses h-bonds.
+
+periodic_dt2_hbonds        n=5  ns/day 68.6, 69.5, 55.8, 61.9, 68.2   mean 64.8   speedup 1.00x
+shellPME_dt4_allbonds      n=3  ns/day 291.2, 299.7, 300.3   mean 297.1   speedup 4.58x
+shellRF12_dt4_allbonds     n=5  ns/day 571.4, 572.3, 572.6, 572.0, 572.3   mean 572.1   speedup 8.83x
+shellRF_dt4_allbonds       n=5  ns/day 444.3, 446.7, 448.2, 446.2, 445.7   mean 446.2   speedup 6.88x

@@ -438,6 +438,12 @@ def derive_top(spec, base_top, workdir):
     return out_top
 
 
+def warmup_time_ps(dt_ps):
+    """Length of the warmup in ps.  dt is already in ps.  Up to v0.2.0 this was
+    divided by 1000 by mistake, so only the t=0 frame was ever skipped."""
+    return WARMUP_STEPS * dt_ps
+
+
 def evaluate(gmx, spec, conf, base_top, ref_ps, strategy_dir, timed):
     """Run one candidate and its checks.  Returns a record dict."""
     workdir = os.path.join(strategy_dir, setting_label(spec))
@@ -446,7 +452,7 @@ def evaluate(gmx, spec, conf, base_top, ref_ps, strategy_dir, timed):
     # dt and ref_ps are both in ps, so steps = ps / (ps per step)
     nprod = int(round(ref_ps / spec["dt"]))
     nsteps = WARMUP_STEPS + nprod
-    warmup_ps = WARMUP_STEPS * spec["dt"] / 1000.0
+    warmup_ps = warmup_time_ps(spec["dt"])
 
     mdp_text, _ = build_mdp(spec, nsteps, ref_ps)
     mdp_path = os.path.join(workdir, "run.mdp")
@@ -791,7 +797,7 @@ def audit(args):
 
 def hmr_check(args):
     text = open(args.top).read()
-    out = args.out or os.path.join(HERE, "top_hmr.top")
+    out = args.out or os.path.join(os.getcwd(), "top_hmr.top")
     path, stats = hmr_transform(text, out)
     print(f"hydrogens repartitioned : {stats['hydrogens']}")
     print(f"relative mass change    : {stats['rel_mass_change']:.3e} "

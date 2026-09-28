@@ -150,8 +150,16 @@ Even a perfect model with error 1e-6 nm holds for only 1.4 ps (720 steps). To
 stay on one exact path for 200 ps, the error must be about `0.1 * exp(-8*200)`,
 about 1e-696, far below float64 precision.
 
-That rules out a path-accurate learned propagator. It does not rule out a useful
-one. The 2 fs integrator itself leaves the exact path within a few Lyapunov times,
+**Caveat (2026-09-27): this measurement is confounded.** Both runs used the
+audit's mdp, with the stochastic v-rescale thermostat and no fixed `ld-seed`, so
+each run drew its own random noise. The separation jumps from 3.4e-5 to 3.3e-3 nm
+in the first 0.04 ps, a hundredfold step that comes from the noise, not from
+exponential growth. The 8.1 /ps rate and the 0.12 ps time therefore do not
+isolate chaotic divergence. A clean measurement needs NVE, or a fixed
+`ld-seed` shared by both runs.
+
+Even with a clean measurement, the argument would rule out a path-accurate
+learned propagator, not a useful one. The 2 fs integrator itself leaves the exact path within a few Lyapunov times,
 and MD is still trusted, because what matters is that its statistics (the
 ensemble and the time correlations) are right. A learned propagator has to meet
 that statistical standard, and this probe does not test it. So the horizon
@@ -334,10 +342,11 @@ proposal in this form. Making it legal removes more than it adds.
   the instantaneous local positions. A local position-only force model is closed.
   A model trained end-to-end to the next positions, not to forces, could still
   absorb these parts statistically, but that is a larger model off this CPU.
-  The Lyapunov probe (experiment 7) shows that no propagator, learned or not,
-  stays on one exact path beyond about 1 ps. That rules out path accuracy, which
-  MD does not provide either. Whether a learned propagator is statistically
-  accurate is untested here, so this route is open, not closed.
+  The Lyapunov probe (experiment 7) was meant to bound path accuracy, but it ran
+  with a stochastic thermostat, so it does not measure chaotic divergence (see
+  the caveat there). Path accuracy is also not what MD provides. Whether a
+  learned propagator is statistically accurate is untested here, so this route
+  is open, not closed.
 - **Learned MTS splitting (idea 4):** closed. The instability is a resonance at a
   slow-force update interval near 15 fs (experiment 8), not a smooth force bias,
   so a learned correction cannot remove it without changing the splitting.

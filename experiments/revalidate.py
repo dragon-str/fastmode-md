@@ -15,8 +15,13 @@ It runs, in sequence and on one machine:
   2. Three seeds each of plain dt 4 fs (h-bonds, no HMR) and of the
      recommended setting (dt 6 fs, HMR factor 3, all-bonds). These validate the
      recommended setting itself and give timing replicates.
-  3. LINCS accuracy tests: dt 6 and dt 7 fs with the default LINCS settings
-     (order 4, 1 iteration) and with order 8, 2 iterations.
+  3. Three seeds of the recommended setting with tighter LINCS (order 8,
+     2 iterations), and single runs at dt 7 fs with both LINCS settings.
+
+Every candidate group goes through fastmode.validate() against every reference.
+Rerunning on the same --out directory reuses finished runs (no new MD) and
+recomputes every observable, so the analysis can be corrected without new
+simulations.
 
 Protein observables (radius of gyration, backbone RMSD, per-residue RMSF) and a
 production-only energy drift exclude the warmup steps.
@@ -101,7 +106,7 @@ def run(gmx, spec, name, conf, top, ref_ps, out, natoms):
     if rec.get("rejected") or rec.get("drift") is None:
         print(f"    failed: {rec.get('reason', '')}", flush=True)
         return rec
-    warmup_ps = fm.WARMUP_STEPS * spec["dt"] / 1000.0
+    warmup_ps = fm.warmup_time_ps(spec["dt"])
     rec["drift_production"] = production_drift(gmx, rec["workdir"], warmup_ps, natoms)
     rec["protein"] = protein_observables(gmx, rec["workdir"], warmup_ps)
     print(f"    {rec['ns_per_day']:.1f} ns/day  drift {rec['drift']:.4f} "
@@ -143,7 +148,8 @@ def summarize(recs, natoms):
         ("Rg (nm)", lambda a, b: abs(a["protein"]["rg"] - b["protein"]["rg"])),
         ("RMSF correlation", lambda a, b: rmsf_corr(a["protein"]["rmsf"], b["protein"]["rmsf"])),
     ]
-    groups = [("plain dt 4 fs, h-bonds", "plain4"), ("dt 6 fs, HMR f3, all-bonds", "rec6")]
+    groups = [("plain dt 4 fs, h-bonds", "plain4"), ("dt 6 fs, HMR f3, all-bonds", "rec6"),
+              ("dt 6 fs, ..., LINCS 8/2", "rec6_lincs8")]
     lines.append("Differences from the 2 fs references. The first column is the noise")
     lines.append("floor: every pair of independent 2 fs references. The others compare")
     lines.append("each candidate seed with each reference seed. min / mean / max over pairs.")
@@ -163,21 +169,26 @@ def summarize(recs, natoms):
         lines.append(row)
     lines.append("")
 
-    lines.append("Four-check verdicts against each reference seed (fastmode.validate):")
+    lines.append("Signed mean density difference from the references (%):")
+    ref_rho = np.mean([r["density"] for r in refs])
     for g, key in groups:
-        n_pass = n_all = 0
-        for s in SEEDS:
-            c = ok.get(f"{key}_s{s}")
-            if not c:
-                continue
-            for r in refs:
-                trial = dict(c)
-                trial["reasons"] = []
-                fm.validate(trial, {"temperature": r["temperature"],
-                                    "density": r["density"], "rdf_g": r["rdf_g"]})
-                n_all += 1
-                n_pass += bool(trial["pass"])
-        lines.append(f"  {g:<30} passes {n_pass} of {n_all} comparisons")
+        cands = [ok[f"{key}_s{s}"]["density"] for s in SEEDS if f"{key}_s{s}" in ok]
+        lines.append(f"  {g:<30} {100 * (np.mean(cands) - ref_rho) / ref_rho:+.3f}")
+    lines.append("")
+
+    lines.append("Four-check verdicts, each candidate run against each reference seed:")
+    names = sorted(n for n in ok if not n.startswith("ref_"))
+    for name in names:
+        c = ok[name]
+        verdicts = []
+        for r in refs:
+            trial = dict(c)
+            trial["reasons"] = []
+            fm.validate(trial, {"temperature": r["temperature"],
+                                "density": r["density"], "rdf_g": r["rdf_g"]})
+            verdicts.append("pass" if trial["pass"] else "FAIL: " + "; ".join(trial["reasons"]))
+        n_pass = sum(v == "pass" for v in verdicts)
+        lines.append(f"  {name:<18} {n_pass}/{len(refs)}  " + " | ".join(verdicts))
     lines.append("")
 
     lines.append("Timing (ns/day, 4 OpenMP threads, runs in sequence on one machine):")
@@ -226,6 +237,8 @@ def main():
     plan += [(f"rec6_lincs8_s{s}", dict(REC6, seed=s, extra_mdp=LINCS_TIGHT)),
              (f"rec7_s{s}", dict(REC7, seed=s)),
              (f"rec7_lincs8_s{s}", dict(REC7, seed=s, extra_mdp=LINCS_TIGHT))]
+    plan += [(f"rec6_lincs8_s{s}", dict(REC6, seed=s, extra_mdp=LINCS_TIGHT))
+             for s in SEEDS[1:]]
 
     recs = {}
     path = os.path.join(out, "revalidate.json")

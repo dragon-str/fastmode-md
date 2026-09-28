@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Validate the 12.9x spherical-shell reaction-field setting against a periodic
-2 fs reference, with independent replicas.
+"""Validate the spherical-shell settings against a periodic 2 fs reference, with
+independent replicas.
 
 Runs N replicas of each configuration with fresh velocities (different gen-seed),
 computes protein observables (Rg, backbone RMSD, per-residue RMSF) and the water
-O-O RDF, and reports the mean and spread across replicas. This gives the 12.9x
-setting a statistical footing that a single 200 ps run cannot.
+O-O RDF, and reports the mean and spread across replicas, which a single 200 ps
+run cannot give.
 
 Usage:
     validate10x.py [--seeds 11,22,33,44,55] [--ns 0.3] [--configs name,name]

@@ -1,0 +1,16 @@
+grompp bond check, villin HP-35, constraints = h-bonds
+(a setting is rejected when a bond period is below 5 x dt)
+
+    dt    HMR  grompp    named bond (residue atom - residue atom), period
+     4    off  accepts  
+     4    2.5  accepts  
+     4      3  accepts  
+     4    3.5  accepts  
+     4      4  rejects   LEU42 CG - LEU42 CD1, 18 fs
+     4    4.5  rejects   LEU42 CG - LEU42 CD1, 14 fs
+     5    off  rejects   ASP44 CG - ASP44 OD1, 22 fs
+     5    2.5  rejects   TRP64 CG - TRP64 CD1, 22 fs
+     5      3  rejects   TRP64 CG - TRP64 CD1, 22 fs
+     5    3.5  rejects   LYS48 CE - LYS48 NZ, 21 fs
+     5      4  rejects   LEU42 CG - LEU42 CD1, 18 fs
+     5    4.5  rejects   LEU42 CG - LEU42 CD1, 14 fs

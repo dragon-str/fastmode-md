@@ -290,3 +290,14 @@ def test_validate_rejected_is_failure():
     rec = _rec(rejected=True)
     assert not fastmode.validate(rec, _ref())
     assert rec["pass"] is False
+
+
+def test_hmr_default_is_three():
+    # 3x the hydrogen mass (1.008 -> 3.024 u); 0.1.0 used 4.0, see CHANGELOG.
+    assert fastmode.HMR_FACTOR == 3.0
+
+
+def test_warmup_time_is_in_ps():
+    # dt is in ps, so 2000 steps at 0.002 ps is 4 ps (0.1.0 computed 0.004 ps).
+    assert fastmode.warmup_time_ps(0.002) == pytest.approx(4.0)
+    assert fastmode.warmup_time_ps(0.006) == pytest.approx(12.0)

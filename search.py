@@ -18,7 +18,8 @@ State goes to `search.json` after every trial, so the dashboard reads live
 progress and the run can resume after a stop.  A candidate already recorded in
 either stage is skipped.
 
-The mass factor is a real integration device (HMR at factor 4 is standard).  The
+The mass factor is a real integration device (HMR factor 3, i.e. 3.024 u
+hydrogens, is the common choice; see fastmode.HMR_FACTOR).  The
 global mass scale is a pure frequency shift: it slows the dynamics, so a speedup
 that comes from it is not the same physics.  It is off by default and recorded
 apart when used.

@@ -136,7 +136,7 @@ def best_speedup(state):
 def svg_space_map(trials, space):
     """Search space: dt on x, mass factor on y, one panel per constraint."""
     dts = sorted({round(t["spec"]["dt"] * 1000) for t in trials}) or [4, 5]
-    factors = sorted({int(t["spec"].get("hmr_factor", 0))
+    factors = sorted({float(t["spec"].get("hmr_factor", 0))
                       for t in trials}) or [0]
     cons = sorted({t["spec"].get("constraints", "h-bonds") for t in trials}) \
         or ["h-bonds"]
@@ -164,12 +164,12 @@ def svg_space_map(trials, space):
         for f in factors:
             gy = 24 + (ph - 20) - (factors.index(f) + 0.5) * ((ph - 20) / max(1, len(factors)))
             parts.append(f'<text x="{px - 4}" y="{gy + 3}" text-anchor="end" '
-                         f'class="svgax">{f or "off"}</text>')
+                         f'class="svgax">{format(f, "g") if f else "off"}</text>')
         for t in trials:
             if t["spec"].get("constraints", "h-bonds") != c:
                 continue
             dt = round(t["spec"]["dt"] * 1000)
-            f = int(t["spec"].get("hmr_factor", 0))
+            f = float(t["spec"].get("hmr_factor", 0))
             if dt not in dts or f not in factors:
                 continue
             gx = px + 14 + (dts.index(dt) + 0.5) * ((pw - 28) / max(1, len(dts)))
