@@ -1,5 +1,5 @@
 ---
-title: "Auditing fast-mode molecular dynamics settings without fooling yourself"
+title: "Auditing fast-mode GROMACS settings against a same-system reference"
 author: "Daniel Reda (ORCID 0000-0001-6160-6215)"
 date: "2026-09-27 (version 0.2.0; corrects version 0.1.0 of 2026-09-12)"
 ---
@@ -297,7 +297,8 @@ registered on OSF at DOI `10.17605/OSF.IO/X4T8M`.
 
 AI coding agents (Claude models from Anthropic, and DeepSeek V4.1 Flash served
 by Fireworks AI) wrote most of the code, ran the simulations and drafted the
-text, working from the author's written specification. AI reviewers found the
+text, working from a specification that an AI assistant drafted and the author
+approved. AI reviewers found the
 errors that version 0.2.0 corrects. The author directed the work and is
 responsible for its content.
 

@@ -15,7 +15,8 @@ papers.
 - **Code.** AI coding agents wrote most of the code in this repository,
   including `fastmode.py`, the search harness, the validation and experiment
   scripts, the machine-learning probes and the unit tests. They worked from a
-  written specification of the task, the four checks and their limits.
+  written specification of the task, the four checks and their limits, which an
+  AI assistant drafted and the author reviewed and approved.
 - **Experiments.** AI agents ran the simulation sweeps and wrote the result
   reports under `results/` and `ml/`.
 - **Text.** AI drafted `README.md`, `CONCLUSIONS.md`, the methods note, the JOSS
@@ -29,8 +30,8 @@ papers.
 
 ## What the author did
 
-The author set the problem and the written specification, chose the systems,
-directed the work, and reviewed the results. The author is responsible for the
+The author set the problem and the goals, approved the written specification,
+chose the systems, directed the work, and reviewed the results. The author is responsible for the
 accuracy, originality and licensing of the software and the papers.
 
 Version 0.1.0 shipped a false central claim that passed through AI-written

@@ -68,6 +68,10 @@ runs before correction.
 
 ### Changed
 
+- Methods note retitled "Auditing fast-mode GROMACS settings against a
+  same-system reference" (was "... without fooling yourself").
+- `AI_USAGE.md`: the written specification was drafted by an AI assistant and
+  approved by the author; 0.1.0 credited the author with designing it.
 - Default HMR factor 4.0 -> 3.0 (1.008 -> 3.024 u). 0.1.0 labelled 4.0 as
   standard.
 - Setting labels always name the HMR factor (`_f3`). In 0.1.0 results, `hmron`

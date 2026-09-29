@@ -128,7 +128,7 @@ user can measure the floors on a different system before trusting a verdict.
 
 # AI usage
 
-AI coding agents (Claude models from Anthropic, and DeepSeek V4.1 Flash served by Fireworks AI) wrote most of the code, ran the simulations and drafted the text, working from the author's written specification. An AI reviewer found the errors that version 0.2.0 corrects. The author directed the work and is responsible for its content. See `AI_USAGE.md` in the repository.
+AI coding agents (Claude models from Anthropic, and DeepSeek V4.1 Flash served by Fireworks AI) wrote most of the code, ran the simulations and drafted the text, working from a specification that an AI assistant drafted and the author approved. An AI reviewer found the errors that version 0.2.0 corrects. The author directed the work and is responsible for its content. See `AI_USAGE.md` in the repository.
 
 # Acknowledgements
 
