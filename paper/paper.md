@@ -290,8 +290,9 @@ input systems and the reduced results are at
 are not stored. The core tool, the re-validation, the timing and the `grompp`
 diagnosis run from the repository; the shell validation needs a shell system
 that is not included, and the machine-learning probes expect the original
-working-tree layout (see `README.md` and `ml/README.md`). Version 0.1.0 is
-registered on OSF at DOI `10.17605/OSF.IO/X4T8M`.
+working-tree layout (see `README.md` and `ml/README.md`). Version 0.2.0 is
+registered on OSF at DOI `10.17605/OSF.IO/AQ9ZV`; version 0.1.0, which this
+version corrects, at DOI `10.17605/OSF.IO/X4T8M`.
 
 # Use of AI
 

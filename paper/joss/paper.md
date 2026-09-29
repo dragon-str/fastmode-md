@@ -134,7 +134,8 @@ AI coding agents (Claude models from Anthropic, and DeepSeek V4.1 Flash served b
 
 The author thanks the GROMACS developers for the simulation engine. The methods
 and the validation results are described in a separate methods note
-(`paper/paper.pdf` in the repository). Its version 0.1.0, registered at DOI
+(`paper/paper.pdf` in the repository), version 0.2.0 registered at DOI
+10.17605/OSF.IO/AQ9ZV. Its version 0.1.0, registered at DOI
 10.17605/OSF.IO/X4T8M, contains errors that version 0.2.0 corrects.
 
 # References

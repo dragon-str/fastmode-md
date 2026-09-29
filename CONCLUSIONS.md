@@ -1,6 +1,7 @@
 # Fast-mode MD audit: findings and recommendations
 
-> **Corrected in v0.2.0 (2026-09-27).** Version 0.1.0, the version registered at
+> **Corrected in v0.2.0 (2026-09-27), registered at DOI 10.17605/OSF.IO/AQ9ZV.**
+> Version 0.1.0, the version registered at
 > DOI 10.17605/OSF.IO/X4T8M, stated that `constraints = all-bonds` alone lets the
 > villin protein reach dt 6-7 fs. That is false: without hydrogen mass
 > repartitioning (HMR), every all-bonds run at dt 5 fs or more crashes. The

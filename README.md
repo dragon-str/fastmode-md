@@ -1,12 +1,12 @@
 # fastmode
 
-[![DOI](https://img.shields.io/badge/DOI-10.17605%2FOSF.IO%2FX4T8M-blue)](https://doi.org/10.17605/OSF.IO/X4T8M)
+[![DOI](https://img.shields.io/badge/DOI-10.17605%2FOSF.IO%2FAQ9ZV-blue)](https://doi.org/10.17605/OSF.IO/AQ9ZV)
 
 Find fast GROMACS integration settings for a system, and check each one against
 a 2 fs reference of that same system.
 
-> **Correction notice (v0.2.0, 2026-09-27).** The DOI above points to v0.1.0, which
-> contains errors. Its main protein claim, that `constraints = all-bonds` alone
+> **Correction notice (v0.2.0, 2026-09-27).** v0.2.0 is registered at the DOI above.
+> v0.1.0, registered at DOI 10.17605/OSF.IO/X4T8M, contains errors. Its main protein claim, that `constraints = all-bonds` alone
 > lets villin reach dt 6-7 fs, is false: without hydrogen mass repartitioning
 > (HMR), every all-bonds run at dt 5 fs or more crashes. The setting it
 > recommended (dt 6 fs, HMR factor 3, all-bonds) does pass, but the protein check

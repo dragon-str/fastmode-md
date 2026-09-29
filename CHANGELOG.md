@@ -105,8 +105,8 @@ runs before correction.
 
 - Absolute paths, user name and host name of the author's machine from result
   files and GROMACS headers.
-- The v0.1.0 DOI from `CITATION.cff`; a DOI for 0.2.0 will follow its
-  registration.
+- The v0.1.0 DOI from `CITATION.cff`, replaced after release by the v0.2.0
+  registration DOI, 10.17605/OSF.IO/AQ9ZV.
 
 ## [0.1.0] - 2026-09-12
 
